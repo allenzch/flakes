@@ -13,10 +13,13 @@ in {
       };
     };
     custom = {
+      portals = {
+        shell.enable = true;
+        terminal.enable = true;
+        browser.enable = true;
+        windowManager.enable = true;
+      };
       programs = {
-        ${portals.terminal}.enable = true;
-        ${portals.launcher}.enable = true;
-        ${portals.browser}.enable = true;
         waybar.enable = true;
         fish.enable = true;
         yazi.enable = true;
