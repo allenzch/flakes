@@ -16,6 +16,7 @@ in {
       portals = {
         shell.enable = true;
         terminal.enable = true;
+        launcher.enable = true;
         browser.enable = true;
         windowManager.enable = true;
       };
