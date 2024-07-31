@@ -13,6 +13,7 @@
       enable = true;
       enableVarPersistence = true;
     };
+    virtualisation.podman.enable = true;
     hm-nixos.allen.enable = true;
   };
 
