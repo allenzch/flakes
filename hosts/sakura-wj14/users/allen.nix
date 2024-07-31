@@ -1,6 +1,6 @@
 { config, pkgs, mylib, mypkgs, data, ... }: {
   home.packages = with pkgs; [
-    julia
+    julia-bin
     hugo
   ];
   programs.bash.enable = true;
