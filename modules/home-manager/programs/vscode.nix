@@ -32,7 +32,7 @@ in {
       after = [];
       before = [ "checkLinkTargets" ];
       data = ''
-        userDir=/home/allen/.config/VSCodium/User
+        userDir=/home/${config.home.username}/.config/VSCodium/User
         rm -rf $userDir/settings.json
       '';
     };
@@ -40,7 +40,7 @@ in {
       after = [ "writeBoundary" ];
       before = [];
       data = ''
-        userDir=/home/allen/.config/VSCodium/User
+        userDir=/home/${config.home.username}/.config/VSCodium/User
         rm -rf $userDir/settings.json
         mkdir -p $userDir
         cat \
