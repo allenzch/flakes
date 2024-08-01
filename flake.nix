@@ -30,6 +30,22 @@
             inherit data;
           };
         };
+        misaka-b760 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            disko.nixosModules.disko
+            impermanence.nixosModules.impermanence
+            home-manager.nixosModules.home-manager
+            self.nixosModules
+            ./hosts/misaka-b760/nixos.nix
+          ];
+          specialArgs = inputs // {
+            inherit mylib;
+            inherit mypkgs;
+            inherit (self) hmModules;
+            inherit data;
+          };
+        };
       };
     };
 
