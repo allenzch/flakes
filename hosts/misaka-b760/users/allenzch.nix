@@ -4,6 +4,19 @@
     hugo
   ];
   programs.bash.enable = true;
+  programs.git = {
+    enable = true;
+    userName = data.git.userName;
+    userEmail = data.git.userEmail;
+    signing.key = "~/.ssh/id_ed25519";
+    extraConfig = {
+      commit.gpgSign = true;
+      gpg = {
+        format = "ssh";
+      };
+      init.defaultBranch = "master";
+    };
+  };
   custom = {
     layers = {
       desktopBase.enable = true;
