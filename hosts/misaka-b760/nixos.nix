@@ -112,7 +112,7 @@
   users = {
     mutableUsers = false;
     users.allenzch = {
-      password = "123456";
+      hashedPasswordFile = "/persist/hashed/allenzch";
       isNormalUser = true;
       extraGroups = [ "wheel" "video" ];
     };
