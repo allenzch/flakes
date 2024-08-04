@@ -39,7 +39,6 @@ in {
     };
     home.packages = with pkgs; [
       pavucontrol
-      wl-clipboard
     ];
     envPersist.directories = [
       "main"

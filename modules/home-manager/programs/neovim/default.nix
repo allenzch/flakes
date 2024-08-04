@@ -41,6 +41,8 @@ in
         telescope-nvim
       ];
 
+      extraPackages = with pkgs; [ wl-clipboard ];
+
       extraConfig = ''
         :colorscheme ${config.colorScheme.slug}
 
