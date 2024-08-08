@@ -1,9 +1,15 @@
-{ config, lib, mypkgs, ... }:
+{ config, lib, mypkgs, pkgs, ... }:
 with lib; let
   cfg = config.custom.services.sway;
   portals = config.custom.portals;
   theme = config.custom.theme;
   modifier = config.wayland.windowManager.sway.config.modifier;
+  screenshotUtility = pkgs.writeShellApplication {
+    name = "swayshot";
+    text = ''
+      ${pkgs.grim}/bin/grim -g "$(swaymsg -t get_tree | ${pkgs.jq}/bin/jq -r '(.. | (.nodes? // empty)[] | select(.type == "con" and .visible) | .rect | "\(.x),\(.y - 27) \(.width)x\(.height + 27)"), (.rect | "\(.x), \(.y) \(.width)x\(.height)")' | ${pkgs.slurp}/bin/slurp -c '#ff0000ff')" - | ${pkgs.wl-clipboard}/bin/wl-copy
+    '';
+  };
 in {
   options.custom.services.sway = {
     enable = mkEnableOption "sway";
@@ -50,7 +56,7 @@ in {
         keybindings = mkMerge [
           {
             "${modifier}+r" = "mode resize";
-            "${modifier}+s" = "mode scratchpad";
+            "${modifier}+s" = "exec systemd-run-app ${screenshotUtility}/bin/swayshot";
             "${modifier}+Shift+q" = "kill";
             "${modifier}+q" = "split toggle";
             "${modifier}+f" = "fullscreen toggle";
