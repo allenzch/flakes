@@ -74,6 +74,12 @@
     enable = true;
     wait-online.enable = false;
     networks = {
+      "20-eno1" = {
+        name = "eno1";
+        address = [ "10.26.254.1/16" ];
+        gateway = [ "10.26.1.3" ];
+        dns = [ "10.26.1.2" ];
+      };
       "20-wlan0" = {
         name = "wlan0";
         DHCP = "yes";
