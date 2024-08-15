@@ -26,6 +26,7 @@
       logseq.enable = true;
       vscode.enable = true;
       telegram.enable = true;
+      direnv.enable = true;
     };
   };
   envPersist.directories = [
