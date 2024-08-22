@@ -124,6 +124,7 @@
       hashedPasswordFile = "/persist/hashed/allen";
       isNormalUser = true;
       extraGroups = [ "wheel" "video" ];
+      shell = pkgs.fish;
     };
   };
 
@@ -155,6 +156,7 @@
     steam = {
       enable = true;
     };
+    fish.enable = true;
   };
   
   home-manager = {
