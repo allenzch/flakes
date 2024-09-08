@@ -299,7 +299,8 @@
         "impermanence": "impermanence",
         "nix-colors": "nix-colors",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-wayland": "nixpkgs-wayland"
+        "nixpkgs-wayland": "nixpkgs-wayland",
+        "wallpapers": "wallpapers"
       }
     },
     "systems": {
@@ -337,6 +338,23 @@
         "owner": "numtide",
         "repo": "treefmt-nix",
         "type": "github"
+      }
+    },
+    "wallpapers": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1725639905,
+        "narHash": "sha256-QxJwX2529/LCtTlI/htsfDExnVzrIkRqW3HdvbIk1Vs=",
+        "ref": "refs/heads/master",
+        "rev": "7485d110944cd373c1210e74cdc1258ea97820a9",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@github.com/allenzch/wallpapers.git"
+      },
+      "original": {
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@github.com/allenzch/wallpapers.git"
       }
     }
   },

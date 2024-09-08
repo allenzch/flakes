@@ -44,6 +44,7 @@
             inherit mypkgs;
             inherit (self) hmModules;
             inherit data;
+            inherit inputs;
           };
         };
       };
@@ -64,6 +65,10 @@
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    wallpapers = {
+      url = "git+ssh://git@github.com/allenzch/wallpapers.git?shallow=1";
+      flake = false;
     };
   };
 }
