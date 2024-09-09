@@ -26,7 +26,6 @@ in {
         htop.enable = true;
         neovim.enable = true;
       };
-      theme.enable = true;
       i18n.fcitx5 = {
         enable = true;
         plasma6Support = true;

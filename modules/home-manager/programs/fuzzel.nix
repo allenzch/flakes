@@ -1,5 +1,7 @@
 { config, lib, mypkgs, ... }:
-with lib; let cfg = config.custom.programs.fuzzel;
+with lib; let
+  cfg = config.custom.programs.fuzzel;
+  theme = config.custom.misc.theme;
 in {
   options.custom.programs.fuzzel = {
     enable = mkEnableOption "fuzzel";
@@ -11,14 +13,16 @@ in {
         main = {
           launch-prefix = "systemd-run-app";
         };
-        colors = {
-          background = "${config.colorScheme.palette.base00}ee";
-          text = "${config.colorScheme.palette.base05}ff";
-          match = "${config.colorScheme.palette.base0D}ff";
-          selection = "${config.colorScheme.palette.base04}ff";
-          selection-text = "${config.colorScheme.palette.base05}ff";
-          selection-match = "${config.colorScheme.palette.base0D}ff";
-          border = "${config.colorScheme.palette.base0D}ff";
+        colors = let
+          palette = theme.inUse.base24Theme; 
+        in {
+          background = "${palette.base00}ee";
+          text = "${palette.base05}ff";
+          match = "${palette.base0D}ff";
+          selection = "${palette.base04}ff";
+          selection-text = "${palette.base05}ff";
+          selection-match = "${palette.base0D}ff";
+          border = "${palette.base0D}ff";
         };
         border = {
           width = "2";

@@ -1,5 +1,7 @@
 { config, lib, pkgs, ... }:
-with lib; let cfg = config.custom.programs.vscode;
+with lib; let
+  cfg = config.custom.programs.vscode;
+  theme = config.custom.misc.theme;
 in {
   options.custom.programs.vscode = {
     enable = mkEnableOption "vscode";
@@ -17,7 +19,7 @@ in {
           colorTheme = {
             "light" = "Catppuccin Latte";
             "dark" = "Catppuccin Macchiato";
-          }.${config.custom.theme.variant};
+          }.${theme.variant};
           preferredLightColorTheme = "Catppuccin Latte";
           preferredDarkColorTheme = "Catppuccin Macchiato";
         };

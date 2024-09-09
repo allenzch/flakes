@@ -1,8 +1,8 @@
 { pkgs, config, lib, ... }:
 with lib; let
   cfg = config.custom.programs.neovim;
-in
-{
+  theme = config.custom.misc.theme;
+in {
   options.custom.programs.neovim = {
     enable = mkEnableOption "neovim";
   };
@@ -44,8 +44,7 @@ in
       extraPackages = with pkgs; [ wl-clipboard ];
 
       extraConfig = ''
-        :colorscheme ${config.colorScheme.slug}
-
+        :colorscheme ${theme.inUse.vimTheme}
         :source ${./nvim.lua}
       '';
     };

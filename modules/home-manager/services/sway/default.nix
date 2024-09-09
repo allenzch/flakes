@@ -2,7 +2,7 @@
 with lib; let
   cfg = config.custom.services.sway;
   portals = config.custom.portals;
-  theme = config.custom.theme;
+  theme = config.custom.misc.theme;
   modifier = config.wayland.windowManager.sway.config.modifier;
   screenshotUtility = pkgs.writeShellApplication {
     name = "swayshot";
@@ -95,22 +95,19 @@ in {
           (mkIf portals.browser.enable { "${modifier}+w" = "exec systemd-run-app ${portals.browser.command}"; })
           { "${modifier}+m" = "exec swaylock"; }
         ];
-        startup = [
-          { command = "swww-daemon --format xrgb"; }
-          { command = "swww img ~/wallpapers/${config.custom.theme.variant}"; }
-        ];
         bars = [ ];
         fonts = {
           names = [ "monospace" ];
           size = 10.5;
         };
-        colors = {
+        colors = let palette = theme.inUse.base24Theme;
+        in {
           focused = {
-            border = "${config.colorScheme.palette.base0D}";
-            background = "${config.colorScheme.palette.base00}";
-            childBorder = "${config.colorScheme.palette.base0D}";
+            border = "${palette.base0D}";
+            background = "${palette.base00}";
+            childBorder = "${palette.base0D}";
             indicator = "#2e9ef4";
-            text = "${config.colorScheme.palette.base05}";
+            text = "${palette.base05}";
           };
         };
       };
