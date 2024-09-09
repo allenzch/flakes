@@ -21,7 +21,6 @@ in {
         windowManager.enable = true;
       };
       programs = {
-        waybar.enable = true;
         fish.enable = true;
         yazi.enable = true;
         htop.enable = true;
