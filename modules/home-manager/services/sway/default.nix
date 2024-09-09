@@ -126,7 +126,6 @@ in {
       mypkgs.systemd-run-app
     ];
     custom.programs = {
-      swww.enable = true;
       swaylock.enable = true;
     };
   };
