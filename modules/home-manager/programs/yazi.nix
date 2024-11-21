@@ -1,5 +1,6 @@
-{ config, lib, ... }:
-with lib; let cfg = config.custom.programs.yazi;
+{ config, lib, pkgs, ... }:
+with lib; let
+  cfg = config.custom.programs.yazi;
 in
 {
   options.custom.programs.yazi = {
@@ -23,6 +24,9 @@ in
         max_width = 1000;
         max_height = 1000;
       };
+      open.prepend_rules = [
+        { mime = "text/texmacs"; use = [ "open" "edit" ]; }
+      ];
     };
   };
 }
