@@ -1,13 +1,21 @@
 {
   description = "a nix flake for system deployment";
 
-  outputs = { self, nixpkgs, disko, impermanence, home-manager, ... } @ inputs:
+  outputs = { self, nixpkgs, disko, impermanence, home-manager, nixpkgs-stable, ... } @ inputs:
     let
       mylib = import ./lib { inherit (nixpkgs) lib; };
       mypkgs = import ./pkgs { inherit pkgs; };
       data = import ./data.nix;
       pkgs = import nixpkgs {
         system = "x86_64-linux";
+      };
+      pkgs-stable = import nixpkgs-stable {
+        system = "x86_64-linux";
+        config = {
+          permittedInsecurePackages = [
+            "electron-27.3.11"
+          ];
+        };
       };
     in
     {
@@ -45,6 +53,7 @@
             inherit (self) hmModules;
             inherit data;
             inherit inputs;
+            inherit pkgs-stable;
           };
         };
       };
@@ -52,6 +61,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
