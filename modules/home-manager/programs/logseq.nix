@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs-stable, ... }:
 with lib; let
   cfg = config.custom.programs.logseq;
   # logseq-catppuccin = with pkgs; stdenv.mkDerivation {
@@ -17,7 +17,9 @@ in {
     enable = mkEnableOption "logseq";
   };
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ logseq ];
+    home.packages = [
+      pkgs-stable.logseq
+    ];
     envPersist.directories = [
       ".logseq"
       ".config/Logseq"
