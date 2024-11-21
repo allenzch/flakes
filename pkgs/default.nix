@@ -1,3 +1,4 @@
 { pkgs }: {
-  systemd-run-app = pkgs.callPackage (import ./systemd-run-app) { };
+  systemd-run-app = pkgs.callPackage ./systemd-run-app { };
+  texmacs = pkgs.callPackage ./texmacs { };
 }
