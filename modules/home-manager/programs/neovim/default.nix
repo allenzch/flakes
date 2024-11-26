@@ -48,5 +48,11 @@ in {
         :source ${./nvim.lua}
       '';
     };
+
+    home.file.".config/nvim/after/ftplugin/python.vim".text = ''
+      set tabstop=2
+      set softtabstop=2
+      set shiftwidth=2
+    '';
   };
 }
