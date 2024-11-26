@@ -36,6 +36,7 @@
             inherit mypkgs;
             inherit (self) hmModules;
             inherit data;
+            inherit pkgs-stable;
           };
         };
         misaka-b760 = nixpkgs.lib.nixosSystem {

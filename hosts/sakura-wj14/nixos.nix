@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, nixpkgs-wayland, impermanence, nix-colors, nixosModules, hmModules, mylib, mypkgs, data, ... }: {
+{ config, lib, pkgs, modulesPath, nixpkgs-wayland, impermanence, nix-colors, nixosModules, hmModules, mylib, mypkgs, data, pkgs-stable, ... }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     ./disko.nix
@@ -183,6 +183,7 @@
       inherit mylib;
       inherit mypkgs;
       inherit data;
+      inherit pkgs-stable;
     };
   };
 }
