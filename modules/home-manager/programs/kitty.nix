@@ -1,11 +1,17 @@
 { config, lib, ... }:
 with lib; let
   cfg = config.custom.programs.kitty;
-  portals = config.custom.portals;
   theme = config.custom.misc.theme;
 in {
   options.custom.programs.kitty = {
     enable = mkEnableOption "kitty";
+    shell = mkOption {
+      type = types.str;
+      default = ".";
+      description = ''
+        The shell program to execute.
+      '';
+    };
   };
   config = mkIf cfg.enable {
     programs.kitty = {
@@ -16,7 +22,7 @@ in {
       };
       settings = mkMerge [
         {
-          shell = "${portals.shell.command}";
+          shell = cfg.shell;
           window_padding_width = "0";
           window_border_width = "0";
           background_opacity = "0.85";
@@ -24,7 +30,6 @@ in {
           confirm_os_window_close = "0";
           enable_audio_bell = "no";
           window_alert_on_bell = "no";
-          map = "kitty_mod+t no_op";
         }
         (mkIf theme.enable (let
           palette = theme.inUse.base24Theme;
@@ -49,6 +54,10 @@ in {
           color15 = "#${palette.base07}";
         }))
       ];
+      keybindings = {
+        "kitty_mod+t" = "no_op";
+        "ctrl+tab" = "launch";
+      };
     };
   };
 }
