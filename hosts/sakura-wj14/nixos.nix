@@ -55,6 +55,10 @@
     bluetooth.enable = true;
   };
 
+  systemd.suppressedSystemUnits = [
+    "systemd-machine-id-commit.service"
+  ];
+
   powerManagement.powertop.enable = true;
   time.timeZone = "Asia/Shanghai";
   i18n.defaultLocale = "en_SG.UTF-8";
