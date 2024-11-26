@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, nixpkgs-wayland, impermanence, nix-colors, nixosModules, hmModules, mylib, mypkgs, data, pkgs-stable, ... }: {
+{ config, lib, pkgs, modulesPath, inputs, nixpkgs-wayland, impermanence, nix-colors, hmModules, mylib, mypkgs, data, pkgs-stable, ... }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     ./disko.nix
@@ -175,6 +175,9 @@
         impermanence.nixosModules.home-manager.impermanence
         nix-colors.homeManagerModules.default
         hmModules
+        ../../modules/home-manager/presets/desktop-environments/niri-default.nix
+        ../../modules/home-manager/presets/themes/catppuccin-default.nix
+        ../../modules/home-manager/presets/fontconfig/noto-default.nix
         ./users/allen.nix
       ];
     };
@@ -183,6 +186,7 @@
       inherit mylib;
       inherit mypkgs;
       inherit data;
+      inherit inputs;
       inherit pkgs-stable;
     };
   };
