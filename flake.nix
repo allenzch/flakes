@@ -36,6 +36,7 @@
             inherit mypkgs;
             inherit (self) hmModules;
             inherit data;
+            inherit inputs;
             inherit pkgs-stable;
           };
         };
