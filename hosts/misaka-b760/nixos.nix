@@ -68,6 +68,10 @@
       trusted-users = [ "root" "@wheel" ];
       flake-registry = "";
     };
+    registry = {
+      nixpkgs.flake = nixpkgs;
+      home-manager.flake = inputs.home-manager;
+    };
   };
 
   networking = {
