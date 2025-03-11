@@ -1,7 +1,6 @@
 { config, lib, mypkgs, pkgs, ... }:
 with lib; let
   cfg = config.custom.services.sway;
-  portals = config.custom.portals;
   theme = config.custom.misc.theme;
   modifier = config.wayland.windowManager.sway.config.modifier;
   screenshotUtility = pkgs.writeShellApplication {
@@ -90,9 +89,6 @@ in {
             "${modifier}+Shift+8" = "move container to workspace 8; workspace 8";
             "${modifier}+Shift+9" = "move container to workspace 9; workspace 9";
           }
-          (mkIf portals.terminal.enable { "${modifier}+Return" = "exec systemd-run-app ${portals.terminal.command}"; })
-          (mkIf portals.launcher.enable { "${modifier}+d" = "exec systemd-run-app ${portals.launcher.command}"; })
-          (mkIf portals.browser.enable { "${modifier}+w" = "exec systemd-run-app ${portals.browser.command}"; })
           { "${modifier}+m" = "exec swaylock"; }
         ];
         bars = [ ];
