@@ -360,10 +360,10 @@
     "wallpapers": {
       "flake": false,
       "locked": {
-        "lastModified": 1725639905,
-        "narHash": "sha256-QxJwX2529/LCtTlI/htsfDExnVzrIkRqW3HdvbIk1Vs=",
+        "lastModified": 1735704046,
+        "narHash": "sha256-A0bcc1SpxJ5QcqsbaNrgJ2kjdm0LqF9obU26WA4zB7g=",
         "ref": "refs/heads/master",
-        "rev": "7485d110944cd373c1210e74cdc1258ea97820a9",
+        "rev": "aac35e50bd27d8486e9e9dfdb8ad2e4babb8d5d5",
         "shallow": true,
         "type": "git",
         "url": "ssh://git@github.com/allenzch/wallpapers.git"
