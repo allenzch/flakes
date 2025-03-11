@@ -32,6 +32,5 @@
   envPersist.directories = [
     ".local"
     ".ssh"
-    ".steam"
   ];
 }

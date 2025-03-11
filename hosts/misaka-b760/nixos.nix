@@ -25,9 +25,6 @@
         "electron-27.3.11"
       ];
       allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-        "steam"
-        "steam-original"
-        "steam-run"
       ];
     };
   };
@@ -164,9 +161,6 @@
 
   programs = {
     dconf.enable = true;
-    steam = {
-      enable = true;
-    };
     fish.enable = true;
   };
   
