@@ -25,6 +25,9 @@
         "electron-27.3.11"
       ];
       allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+        "nvidia-x11"
+        "nvidia-settings"
+        "nvidia-persistenced"
       ];
     };
   };
@@ -51,6 +54,8 @@
     };
     bluetooth.enable = true;
   };
+
+  custom.hardware.nvidia.enable = true;
 
   systemd.suppressedSystemUnits = [
     "systemd-machine-id-commit.service"
