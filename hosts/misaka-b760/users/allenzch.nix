@@ -18,19 +18,29 @@
     };
   };
   custom = {
-    layers = {
-      desktopBase.enable = true;
-    };
     programs = {
       zotero.enable = true;
       logseq.enable = true;
       vscode.enable = true;
       telegram.enable = true;
       direnv.enable = true;
+      fish.enable = true;
+      yazi.enable = true;
+      htop.enable = true;
+      neovim.enable = true;
+    };
+    i18n.fcitx5 = {
+      enable = true;
+      plasma6Support = true;
+      withConfigtool = true;
+      addons = with pkgs; [
+        qt6Packages.fcitx5-chinese-addons
+      ];
     };
   };
   envPersist.directories = [
     ".local"
     ".ssh"
+    "main"
   ];
 }
