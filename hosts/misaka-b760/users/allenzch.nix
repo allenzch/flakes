@@ -3,6 +3,17 @@
     julia-bin
     hugo
   ];
+  imports = [
+    ../../../home-manager/profiles/direnv.nix
+    ../../../home-manager/profiles/fish.nix
+    ../../../home-manager/profiles/yazi.nix
+    ../../../home-manager/profiles/htop.nix
+    ../../../home-manager/profiles/neovim
+    ../../../home-manager/profiles/zotero.nix
+    ../../../home-manager/profiles/logseq.nix
+    ../../../home-manager/profiles/vscode.nix
+    ../../../home-manager/profiles/telegram.nix
+  ];
   programs.bash.enable = true;
   programs.git = {
     enable = true;
@@ -18,17 +29,6 @@
     };
   };
   custom = {
-    programs = {
-      zotero.enable = true;
-      logseq.enable = true;
-      vscode.enable = true;
-      telegram.enable = true;
-      direnv.enable = true;
-      fish.enable = true;
-      yazi.enable = true;
-      htop.enable = true;
-      neovim.enable = true;
-    };
     i18n.fcitx5 = {
       enable = true;
       plasma6Support = true;

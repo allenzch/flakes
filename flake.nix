@@ -20,7 +20,7 @@
     in
     {
       nixosModules = import ./modules/nixos;
-      hmModules = import ./modules/home-manager;
+      hmModules = import ./home-manager/modules;
       nixosConfigurations = {
         sakura-wj14 = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";

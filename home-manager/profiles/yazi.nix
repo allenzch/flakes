@@ -1,12 +1,6 @@
 { config, lib, pkgs, ... }:
-with lib; let
-  cfg = config.custom.programs.yazi;
-in
 {
-  options.custom.programs.yazi = {
-    enable = mkEnableOption "yazi";
-  };
-  config.programs.yazi = mkIf cfg.enable {
+  programs.yazi = {
     enable = true;
     settings = {
       manager = {

@@ -64,7 +64,7 @@ vim.api.nvim_set_keymap('', '<tab>', ':bnext<CR>', { noremap = true })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
-local servers = { 'nil_ls', 'pyright', 'rust_analyzer' }
+local servers = { 'nil_ls', 'clangd', 'pyright', 'rust_analyzer', 'fortls' }
 
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
@@ -217,3 +217,10 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+vim.cmd [[
+  highlight Normal guibg=none
+  highlight NonText guibg=none
+  highlight Normal ctermbg=none
+  highlight NonText ctermbg=none
+]]

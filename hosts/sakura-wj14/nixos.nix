@@ -180,9 +180,9 @@
         impermanence.nixosModules.home-manager.impermanence
         nix-colors.homeManagerModules.default
         hmModules
-        ../../modules/home-manager/presets/desktop-environments/niri-default.nix
-        ../../modules/home-manager/presets/themes/catppuccin-default.nix
-        ../../modules/home-manager/presets/fontconfig/noto-default.nix
+        ../../home-manager/modules/presets/desktop-environments/niri-default.nix
+        ../../home-manager/modules/presets/themes/catppuccin-default.nix
+        ../../home-manager/modules/presets/fontconfig/noto-default.nix
         ./users/allen.nix
       ];
     };
