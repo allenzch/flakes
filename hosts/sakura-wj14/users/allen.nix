@@ -13,6 +13,7 @@
     ../../../home-manager/profiles/logseq.nix
     ../../../home-manager/profiles/vscode.nix
     ../../../home-manager/profiles/telegram.nix
+    ../../../home-manager/profiles/texmacs
   ];
   programs.bash.enable = true;
   programs.git = {
