@@ -63,6 +63,20 @@
 
   time.timeZone = "Asia/Shanghai";
   i18n.defaultLocale = "en_SG.UTF-8";
+
+  sops = {
+    secrets = {
+      "user-password/allenzch" = {
+        neededForUsers = true;
+        sopsFile = ../../secrets/local.yaml;
+      };
+    };
+    age = {
+      keyFile = "/persist/sops.key";
+      sshKeyPaths = [ ];
+    };
+    gnupg.sshKeyPaths = [ ];
+  };
   
   nix = {
     settings = {
@@ -134,7 +148,7 @@
   users = {
     mutableUsers = false;
     users.allenzch = {
-      hashedPasswordFile = "/persist/hashed/allenzch";
+      hashedPasswordFile = config.sops.secrets."user-password/allenzch".path;
       isNormalUser = true;
       extraGroups = [ "wheel" "video" ];
       shell = pkgs.fish;

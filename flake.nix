@@ -1,7 +1,7 @@
 {
   description = "a nix flake for system deployment";
 
-  outputs = { self, nixpkgs, disko, impermanence, home-manager, nixpkgs-stable, ... } @ inputs:
+  outputs = { self, nixpkgs, disko, impermanence, sops-nix, home-manager, nixpkgs-stable, ... } @ inputs:
     let
       mylib = import ./lib {
         inherit inputs;
@@ -31,6 +31,7 @@
           modules = [
             disko.nixosModules.disko
             impermanence.nixosModules.impermanence
+            sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
             self.nixosModules
             ./hosts/sakura-wj14/nixos.nix
@@ -50,6 +51,7 @@
           modules = [
             disko.nixosModules.disko
             impermanence.nixosModules.impermanence
+            sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
             self.nixosModules
             ./hosts/misaka-b760/nixos.nix

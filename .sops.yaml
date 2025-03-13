@@ -1,0 +1,9 @@
+keys:
+  age:
+    - &misaka-b760 age1u45uunqcxs6urd0tyr62hxpawmr508zul9pducwe0dnr0fucy40ql64jqz
+creation_rules:
+  - path_regex: secrets/local.*
+    key_groups:
+      - age:
+        - *misaka-b760
+
