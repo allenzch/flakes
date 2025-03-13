@@ -2,17 +2,6 @@
 with lib; let
   theme = config.custom.misc.theme;
 in {
-  home.packages = with pkgs; [
-    # language server
-    nil
-    pyright
-    rust-analyzer
-    fortls
-
-    # formatter
-    nixpkgs-fmt
-  ];
-
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -40,6 +29,9 @@ in {
       wl-clipboard
       clang-tools
       nixd
+      pyright
+      fortls
+      nixpkgs-fmt
     ];
 
     extraConfig = ''
