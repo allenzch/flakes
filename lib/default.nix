@@ -1,4 +1,19 @@
-{ lib }: rec {
+{ lib, inputs }: rec {
+  haumea = inputs.haumea.lib;
+
+  rakeLeaves =
+    src:
+    haumea.load {
+      inherit src;
+      loader = haumea.loaders.path;
+      transformer =
+        _cursor: dir:
+        if dir ? default then
+          dir.default
+        else
+          dir;
+    };
+
   getItemNames = path: keep:
     let
       inherit (lib) types;

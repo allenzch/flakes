@@ -3,7 +3,10 @@
 
   outputs = { self, nixpkgs, disko, impermanence, home-manager, nixpkgs-stable, ... } @ inputs:
     let
-      mylib = import ./lib { inherit (nixpkgs) lib; };
+      mylib = import ./lib {
+        inherit inputs;
+        inherit (nixpkgs) lib;
+      };
       mypkgs = import ./pkgs { inherit pkgs; };
       data = import ./data.nix;
       pkgs = import nixpkgs {
