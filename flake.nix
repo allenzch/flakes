@@ -24,6 +24,7 @@
     {
       nixosModules = import ./modules/nixos;
       hmModules = import ./home-manager/modules;
+      homeProfiles = mylib.rakeLeaves ./home-manager/profiles;
       nixosConfigurations = {
         sakura-wj14 = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -38,6 +39,7 @@
             inherit mylib;
             inherit mypkgs;
             inherit (self) hmModules;
+            inherit (self) homeProfiles;
             inherit data;
             inherit inputs;
             inherit pkgs-stable;
@@ -56,6 +58,7 @@
             inherit mylib;
             inherit mypkgs;
             inherit (self) hmModules;
+            inherit (self) homeProfiles;
             inherit data;
             inherit inputs;
             inherit pkgs-stable;

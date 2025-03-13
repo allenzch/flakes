@@ -39,6 +39,7 @@ in {
     extraPackages = with pkgs; [
       wl-clipboard
       clang-tools
+      nixd
     ];
 
     extraConfig = ''

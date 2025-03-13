@@ -64,17 +64,12 @@ vim.api.nvim_set_keymap('', '<tab>', ':bnext<CR>', { noremap = true })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
-local servers = { 'nil_ls', 'clangd', 'pyright', 'rust_analyzer', 'fortls' }
+local servers = { 'nixd', 'clangd', 'pyright', 'rust_analyzer', 'fortls' }
 
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
     capabilities = capabilities,
     settings = {
-      ['nil'] = {
-        formatting = {
-          command = { 'nixpkgs-fmt' }
-        }
-      },
     },
   }
 end

@@ -1,19 +1,26 @@
-{ config, pkgs, mylib, mypkgs, data, ... }: {
+{ config, pkgs, mylib, mypkgs, homeProfiles, data, ... }: {
   home.packages = with pkgs; [
     julia-bin
     hugo
   ];
-  imports = [
-    ../../../home-manager/profiles/direnv.nix
-    ../../../home-manager/profiles/fish.nix
-    ../../../home-manager/profiles/yazi.nix
-    ../../../home-manager/profiles/htop.nix
-    ../../../home-manager/profiles/neovim
-    ../../../home-manager/profiles/logseq.nix
-    ../../../home-manager/profiles/vscode.nix
-    ../../../home-manager/profiles/telegram.nix
-    ../../../home-manager/profiles/texmacs
-  ];
+  imports =
+    (with homeProfiles.programs; [
+      direnv
+      fish
+      yazi
+      htop
+      neovim
+      logseq
+      vscode
+      telegram
+      texmacs
+    ]) ++
+    (with homeProfiles; [
+      desktop-environments.niri-default
+      misc.theme-catppuccin
+      misc.font-noto
+    ]);
+
   programs.bash.enable = true;
   programs.git = {
     enable = true;

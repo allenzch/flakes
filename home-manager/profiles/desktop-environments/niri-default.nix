@@ -1,4 +1,4 @@
-{ pkgs, mypkgs, ... }: {
+{ pkgs, mypkgs, homeProfiles, ... }: {
   home.packages = with pkgs; [
     mypkgs.systemd-run-app
     nautilus
@@ -7,11 +7,11 @@
     papers
     mpv
   ];
-  imports = [
-    ../../../profiles/kitty.nix
-    ../../../profiles/fuzzel.nix
-    ../../../profiles/swaylock.nix
-    ../../../profiles/firefox.nix
+  imports = with homeProfiles.programs; [
+    kitty
+    fuzzel
+    swaylock
+    firefox
   ];
   custom = {
     misc = {
