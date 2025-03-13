@@ -9,7 +9,6 @@
     ../../../home-manager/profiles/yazi.nix
     ../../../home-manager/profiles/htop.nix
     ../../../home-manager/profiles/neovim
-    ../../../home-manager/profiles/zotero.nix
     ../../../home-manager/profiles/logseq.nix
     ../../../home-manager/profiles/vscode.nix
     ../../../home-manager/profiles/telegram.nix
