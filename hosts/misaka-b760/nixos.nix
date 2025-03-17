@@ -8,6 +8,7 @@
       hardware.nvidia
       networking.iwd
       security.sudo
+      security.hardware-keys
     ]);
 
   custom = {

@@ -7,6 +7,7 @@
     (with nixosProfiles; [
       networking.iwd
       security.sudo
+      security.hardware-keys
     ]);
 
   custom = {
