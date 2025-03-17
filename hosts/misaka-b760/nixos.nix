@@ -1,19 +1,16 @@
-{ config, lib, pkgs, modulesPath, self, inputs, nixpkgs, nixpkgs-wayland, impermanence, nix-colors, hmModules, homeProfiles, mylib, mypkgs, data, pkgs-stable, ... }: {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-    ./disko.nix
-  ];
+{ config, lib, pkgs, modulesPath, self, inputs, nixpkgs, nixpkgs-wayland, impermanence, nix-colors, nixosProfiles, hmModules, homeProfiles, mylib, mypkgs, data, pkgs-stable, ... }: {
+  imports =
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
+      ./disko.nix
+    ] ++
+    (with nixosProfiles; [
+      hardware.nvidia
+      networking.iwd
+      security.sudo
+    ]);
 
   custom = {
-    security.sudo = {
-      enable = true;
-      enableVarPersistence = true;
-    };
-    networking.wireless.iwd = {
-      enable = true;
-      enableVarPersistence = true;
-    };
-    virtualisation.podman.enable = true;
     hm-nixos.allenzch.enable = true;
   };
 
@@ -54,8 +51,6 @@
     };
     bluetooth.enable = true;
   };
-
-  custom.hardware.nvidia.enable = true;
 
   systemd.suppressedSystemUnits = [
     "systemd-machine-id-commit.service"

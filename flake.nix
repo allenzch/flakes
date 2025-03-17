@@ -22,7 +22,8 @@
       };
     in
     {
-      nixosModules = import ./modules/nixos;
+      nixosModules = import ./nixos/modules;
+      nixosProfiles = mylib.rakeLeaves ./nixos/profiles;
       hmModules = import ./home-manager/modules;
       homeProfiles = mylib.rakeLeaves ./home-manager/profiles;
       nixosConfigurations = {
@@ -39,6 +40,7 @@
           specialArgs = inputs // {
             inherit mylib;
             inherit mypkgs;
+            inherit (self) nixosProfiles;
             inherit (self) hmModules;
             inherit (self) homeProfiles;
             inherit data;
@@ -59,6 +61,7 @@
           specialArgs = inputs // {
             inherit mylib;
             inherit mypkgs;
+            inherit (self) nixosProfiles;
             inherit (self) hmModules;
             inherit (self) homeProfiles;
             inherit data;
