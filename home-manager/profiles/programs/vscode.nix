@@ -5,25 +5,27 @@ in {
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;
-    userSettings = {
-      editor = {
-        tabSize = 2;
-        wordWrap = "on";
+    profiles.default = {
+      userSettings = {
+        editor = {
+          tabSize = 2;
+          wordWrap = "on";
+        };
+        workbench = {
+          colorTheme = {
+            "light" = "Catppuccin Latte";
+            "dark" = "Catppuccin Macchiato";
+          }.${theme.variant};
+          preferredLightColorTheme = "Catppuccin Latte";
+          preferredDarkColorTheme = "Catppuccin Macchiato";
+        };
+        window.autoDetectColorScheme = "on";
       };
-      workbench = {
-        colorTheme = {
-          "light" = "Catppuccin Latte";
-          "dark" = "Catppuccin Macchiato";
-        }.${theme.variant};
-        preferredLightColorTheme = "Catppuccin Latte";
-        preferredDarkColorTheme = "Catppuccin Macchiato";
-      };
-      window.autoDetectColorScheme = "on";
+      extensions = with pkgs; [
+        vscode-extensions.catppuccin.catppuccin-vsc
+        vscode-extensions.bbenoist.nix
+      ];
     };
-    extensions = with pkgs; [
-      vscode-extensions.catppuccin.catppuccin-vsc
-      vscode-extensions.bbenoist.nix
-    ];
   };
   home.activation.beforeCheckLinkTargets = {
     after = [];
@@ -42,7 +44,7 @@ in {
       mkdir -p $userDir
       cat \
         ${(pkgs.formats.json {}).generate "blabla"
-          config.programs.vscode.userSettings} \
+          config.programs.vscode.profiles.default.userSettings} \
         > $userDir/settings.json
     '';
   };
