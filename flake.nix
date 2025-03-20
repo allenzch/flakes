@@ -22,7 +22,7 @@
       };
     in
     {
-      nixosModules = import ./nixos/modules;
+      nixosModules = mylib.buildModuleList ./nixos/modules;
       nixosProfiles = mylib.rakeLeaves ./nixos/profiles;
       hmModules = import ./home-manager/modules;
       homeProfiles = mylib.rakeLeaves ./home-manager/profiles;
@@ -34,9 +34,8 @@
             impermanence.nixosModules.impermanence
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
-            self.nixosModules
             ./hosts/sakura-wj14/nixos.nix
-          ];
+          ] ++ self.nixosModules;
           specialArgs = inputs // {
             inherit mylib;
             inherit mypkgs;
@@ -55,9 +54,8 @@
             impermanence.nixosModules.impermanence
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
-            self.nixosModules
             ./hosts/misaka-b760/nixos.nix
-          ];
+          ] ++ self.nixosModules;
           specialArgs = inputs // {
             inherit mylib;
             inherit mypkgs;
