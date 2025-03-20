@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, inputs, nixpkgs-wayland, impermanence, nix-colors, nixosProfiles, hmModules, homeProfiles, mylib, mypkgs, data, pkgs-stable, ... }: {
+{ config, lib, pkgs, modulesPath, inputs, impermanence, nix-colors, nixosProfiles, hmModules, homeProfiles, mylib, mypkgs, data, pkgs-stable, ... }: {
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
@@ -15,7 +15,6 @@
   };
 
   nixpkgs = {
-    overlays = [ nixpkgs-wayland.overlay ];
     hostPlatform = lib.mkDefault "x86_64-linux";
     config = {
       permittedInsecurePackages = [
@@ -152,7 +151,7 @@
 
   services.greetd = {
     enable = true;
-    settings = rec {
+    settings = {
       default_session = {
         command = "${lib.getExe pkgs.greetd.tuigreet} --cmd ${pkgs.writeShellScript "sway" ''
 	  exec systemd-cat --identifier=sway sway -D legacy-wl-drm
