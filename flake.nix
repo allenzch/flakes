@@ -47,6 +47,20 @@
             inherit pkgs-stable;
           };
         };
+        koishi-n100 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            disko.nixosModules.disko
+            impermanence.nixosModules.impermanence
+            sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
+            ./hosts/koishi-n100/nixos.nix
+          ] ++ self.nixosModules;
+          specialArgs = inputs // {
+            inherit (self) nixosProfiles;
+            inherit inputs;
+          };
+        };
         misaka-b760 = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
