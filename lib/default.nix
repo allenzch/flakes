@@ -14,6 +14,21 @@
           dir;
     };
 
+  flattenTree =
+    tree:
+    let
+      mkNewPrefix = prefix: name: "${if prefix == "" then "" else "${prefix}/"}${name}";
+      flattenTree' =
+        prefix: remain:
+        if lib.isAttrs remain then
+          lib.flatten (lib.mapAttrsToList (name: value: flattenTree' (mkNewPrefix prefix name) value) remain)
+        else
+          [ (lib.nameValuePair prefix remain) ];
+    in
+    lib.listToAttrs (flattenTree' "" tree);
+
+  buildModuleList = dir: lib.attrValues (flattenTree (rakeLeaves dir));
+
   getItemNames = path: keep:
     let
       inherit (lib) types;
