@@ -12,6 +12,8 @@
     fuzzel
     swaylock
     firefox
+    swww
+    waybar
   ];
   custom = {
     misc = {
@@ -32,8 +34,6 @@
           "Mod+V" = { spawn = [ "cliphist-fuzzel" ]; };
         };
       };
-      waybar.enable = true;
-      swww.enable = true;
     };
   };
   home.sessionVariables.NIXOS_OZONE_WL = 1;
