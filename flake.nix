@@ -24,7 +24,7 @@
     {
       nixosModules = mylib.buildModuleList ./nixos/modules;
       nixosProfiles = mylib.rakeLeaves ./nixos/profiles;
-      hmModules = import ./home-manager/modules;
+      homeModules = mylib.buildModuleList ./home-manager/modules;
       homeProfiles = mylib.rakeLeaves ./home-manager/profiles;
       nixosConfigurations = {
         sakura-wj14 = nixpkgs.lib.nixosSystem {
@@ -40,7 +40,7 @@
             inherit mylib;
             inherit mypkgs;
             inherit (self) nixosProfiles;
-            inherit (self) hmModules;
+            inherit (self) homeModules;
             inherit (self) homeProfiles;
             inherit data;
             inherit inputs;
@@ -74,7 +74,7 @@
             inherit mylib;
             inherit mypkgs;
             inherit (self) nixosProfiles;
-            inherit (self) hmModules;
+            inherit (self) homeModules;
             inherit (self) homeProfiles;
             inherit data;
             inherit inputs;

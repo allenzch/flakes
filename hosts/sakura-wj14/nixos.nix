@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, inputs, impermanence, nix-colors, nixosProfiles, hmModules, homeProfiles, mylib, mypkgs, data, pkgs-stable, ... }: {
+{ config, lib, pkgs, modulesPath, inputs, impermanence, nix-colors, nixosProfiles, homeModules, homeProfiles, mylib, mypkgs, data, pkgs-stable, ... }: {
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
@@ -175,9 +175,8 @@
       imports = [
         impermanence.nixosModules.home-manager.impermanence
         nix-colors.homeManagerModules.default
-        hmModules
         ./users/allen.nix
-      ];
+      ] ++ homeModules;
     };
     extraSpecialArgs = {
       inherit nix-colors;
