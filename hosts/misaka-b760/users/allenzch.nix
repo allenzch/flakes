@@ -1,8 +1,4 @@
 { config, pkgs, mylib, mypkgs, homeProfiles, data, ... }: {
-  home.packages = with pkgs; [
-    julia-bin
-    hugo
-  ];
   imports =
     (with homeProfiles.programs; [
       direnv
