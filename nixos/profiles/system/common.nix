@@ -4,6 +4,10 @@
   i18n.defaultLocale = "en_SG.UTF-8";
 
   users.mutableUsers = false;
+  services.userborn = {
+    enable = true;
+    passwordFilesLocation = "/var/lib/nixos";
+  };
 
   systemd.suppressedSystemUnits = [
     "systemd-machine-id-commit.service"
