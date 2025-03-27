@@ -101,6 +101,7 @@
     };
     impermanence.url = "github:nix-community/impermanence";
     nix-colors.url = "github:misterio77/nix-colors";
+    enthalpy.url = "https://git.rebmit.moe/rebmit/enthalpy/archive/master.tar.gz";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

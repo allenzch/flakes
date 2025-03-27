@@ -16,6 +16,29 @@
         "type": "github"
       }
     },
+    "devshell": {
+      "inputs": {
+        "nixpkgs": [
+          "enthalpy",
+          "rebmit",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1735644329,
+        "narHash": "sha256-tO3HrHriyLvipc4xr+Ewtdlo7wM1OjXNjlWRgmM7peY=",
+        "owner": "numtide",
+        "repo": "devshell",
+        "rev": "f7795ede5b02664b57035b3b757876703e2c3eac",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "ref": "main",
+        "repo": "devshell",
+        "type": "github"
+      }
+    },
     "disko": {
       "inputs": {
         "nixpkgs": [
@@ -36,7 +59,162 @@
         "type": "github"
       }
     },
+    "enthalpy": {
+      "inputs": {
+        "devshell": [
+          "enthalpy",
+          "rebmit",
+          "devshell"
+        ],
+        "flake-parts": [
+          "enthalpy",
+          "rebmit",
+          "flake-parts"
+        ],
+        "git-hooks-nix": [
+          "enthalpy",
+          "rebmit",
+          "git-hooks-nix"
+        ],
+        "nixpkgs": [
+          "enthalpy",
+          "rebmit",
+          "nixpkgs"
+        ],
+        "rebmit": "rebmit",
+        "treefmt-nix": [
+          "enthalpy",
+          "rebmit",
+          "treefmt-nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1742839291,
+        "narHash": "sha256-EobUdWtUgkX/EaDpHApbVTGQoqliVX2tQnPXeeZJTrs=",
+        "rev": "a9de7ae5d88f84c2a5cfb99f7f7f8176d4c6b05c",
+        "type": "tarball",
+        "url": "https://git.rebmit.moe/api/v1/repos/rebmit/enthalpy/archive/a9de7ae5d88f84c2a5cfb99f7f7f8176d4c6b05c.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://git.rebmit.moe/rebmit/enthalpy/archive/master.tar.gz"
+      }
+    },
+    "flake-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1733328505,
+        "narHash": "sha256-NeCCThCEP3eCl2l/+27kNNK7QrwZB1IJCrXfrbv5oqU=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "ff81ac966bb2cae68946d5ed5fc4994f96d0ffec",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "flake-parts": {
+      "inputs": {
+        "nixpkgs-lib": [
+          "enthalpy",
+          "rebmit",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1738453229,
+        "narHash": "sha256-7H9XgNiGLKN1G1CgRh0vUL4AheZSYzPm+zmZ7vxbJdo=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "32ea77a06711b758da0ad9bd6a844c5740a87abd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "git-hooks-nix": {
+      "inputs": {
+        "flake-compat": [
+          "enthalpy",
+          "rebmit",
+          "flake-compat"
+        ],
+        "gitignore": [
+          "enthalpy",
+          "rebmit",
+          "gitignore-nix"
+        ],
+        "nixpkgs": [
+          "enthalpy",
+          "rebmit",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1737465171,
+        "narHash": "sha256-R10v2hoJRLq8jcL4syVFag7nIGE7m13qO48wRIukWNg=",
+        "owner": "cachix",
+        "repo": "git-hooks.nix",
+        "rev": "9364dc02281ce2d37a1f55b6e51f7c0f65a75f17",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cachix",
+        "repo": "git-hooks.nix",
+        "type": "github"
+      }
+    },
+    "gitignore-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "enthalpy",
+          "rebmit",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1709087332,
+        "narHash": "sha256-HG2cCnktfHsKV0s4XW83gU3F57gaTljL9KNSuG6bnQs=",
+        "owner": "hercules-ci",
+        "repo": "gitignore.nix",
+        "rev": "637db329424fd7e46cf4185293b9cc8c88c95394",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "gitignore.nix",
+        "type": "github"
+      }
+    },
     "haumea": {
+      "inputs": {
+        "nixpkgs": [
+          "enthalpy",
+          "rebmit",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1708375098,
+        "narHash": "sha256-DaFJp3wDHgOqx98U0SF57bXaH2Orp106c+jSdPCVu1E=",
+        "owner": "nix-community",
+        "repo": "haumea",
+        "rev": "ec6350fd9353e7f27ce0e85d31f82e3ed73e4d70",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "haumea",
+        "type": "github"
+      }
+    },
+    "haumea_2": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
@@ -157,10 +335,55 @@
         "type": "github"
       }
     },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1740120235,
+        "narHash": "sha256-+x/stAkrpf7yG0cYZuWVGErucQc+GS1gYKaJYI705WY=",
+        "owner": "rebmit",
+        "repo": "nixpkgs",
+        "rev": "2b7cb897a753f10b76022d8db814290f11addf23",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rebmit",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "rebmit": {
+      "inputs": {
+        "devshell": "devshell",
+        "flake-compat": "flake-compat",
+        "flake-parts": "flake-parts",
+        "git-hooks-nix": "git-hooks-nix",
+        "gitignore-nix": "gitignore-nix",
+        "haumea": "haumea",
+        "nixpkgs": [
+          "enthalpy",
+          "rebmit",
+          "nixpkgs-unstable"
+        ],
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "treefmt-nix": "treefmt-nix"
+      },
+      "locked": {
+        "lastModified": 1742115255,
+        "narHash": "sha256-ipTV//avbZGHVZxTa+E+M7LkIUnYajbw3WGDu1nUYT8=",
+        "rev": "cc87e208730a2d18e15945842eda675e499f615a",
+        "type": "tarball",
+        "url": "https://git.rebmit.moe/api/v1/repos/rebmit/nix-exprs/archive/cc87e208730a2d18e15945842eda675e499f615a.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://git.rebmit.moe/rebmit/nix-exprs/archive/master.tar.gz"
+      }
+    },
     "root": {
       "inputs": {
         "disko": "disko",
-        "haumea": "haumea",
+        "enthalpy": "enthalpy",
+        "haumea": "haumea_2",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "nix-colors": "nix-colors",
@@ -187,6 +410,28 @@
       "original": {
         "owner": "Mic92",
         "repo": "sops-nix",
+        "type": "github"
+      }
+    },
+    "treefmt-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "enthalpy",
+          "rebmit",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1739829690,
+        "narHash": "sha256-mL1szCeIsjh6Khn3nH2cYtwO5YXG6gBiTw1A30iGeDU=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "3d0579f5cc93436052d94b73925b48973a104204",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
         "type": "github"
       }
     },
