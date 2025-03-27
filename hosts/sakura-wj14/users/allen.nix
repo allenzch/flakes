@@ -45,6 +45,5 @@
     ".local"
     ".ssh"
     "main"
-    ".steam"
   ];
 }
