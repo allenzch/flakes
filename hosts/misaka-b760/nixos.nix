@@ -10,6 +10,8 @@
       security.sudo
       security.hardware-keys
       system.common
+      services.enthalpy
+      system.nixpkgs
     ]);
 
   custom = {
@@ -112,6 +114,23 @@
         KEYBOARD_KEY_70039=esc
         KEYBOARD_KEY_70029=capslock
     '';
+    enthalpy = {
+      prefix = "2a0e:aa07:e21d:2620::/60";
+      ipsec.interfaces = [ "eno1" ];
+      clat = {
+        enable = true;
+        segment = [ "2a0e:aa07:e21c:2546::2" ];
+      };
+    };
+    proxy = {
+      enable = true;
+      inbounds = [
+        {
+          netnsPath = config.networking.netns.enthalpy.netnsPath;
+          listenPort = config.networking.netns.enthalpy.ports.proxy-init-netns;
+        }
+      ];
+    };
   };
 
   services.gnome.gnome-keyring.enable = true;
@@ -184,4 +203,13 @@
       inherit homeProfiles;
     };
   };
+
+  systemd.services.nix-daemon = config.networking.netns.enthalpy.config;
+
+  systemd.services."user@1000" =
+    config.networking.netns.enthalpy.config
+    // {
+      overrideStrategy = "asDropin";
+      restartIfChanged = false;
+    };
 }
