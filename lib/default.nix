@@ -57,4 +57,8 @@
       (name: path + "/${name}")
       (getItemNames path keep)
   );
+
+  network = import ./network { inherit lib; };
+
+  misc = import ./misc { inherit lib; };
 }
