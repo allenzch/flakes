@@ -12,7 +12,7 @@
     ]);
 
   custom = {
-    hm-nixos.allen.enable = true;
+    hm-nixos.allenzch.enable = true;
   };
 
   nixpkgs = {
@@ -116,9 +116,15 @@
     wget
   ];
 
+  sops.secrets = {
+    "user-password/allenzch" = {
+      neededForUsers = true;
+      sopsFile = ../../secrets/local.yaml;
+    };
+  };
   users = {
-    users.allen = {
-      hashedPasswordFile = "/persist/hashed/allen";
+    users.allenzch = {
+      hashedPasswordFile = config.sops.secrets."user-password/allenzch".path;
       isNormalUser = true;
       extraGroups = [ "wheel" "video" ];
       shell = pkgs.fish;
@@ -156,11 +162,11 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = false;
-    users.allen = {
+    users.allenzch = {
       imports = [
         impermanence.nixosModules.home-manager.impermanence
         nix-colors.homeManagerModules.default
-        ./users/allen.nix
+        ./users/allenzch.nix
       ] ++ homeModules;
     };
     extraSpecialArgs = {
