@@ -8,6 +8,7 @@
       networking.iwd
       security.sudo
       security.hardware-keys
+      system.common
     ]);
 
   custom = {
@@ -46,13 +47,7 @@
     bluetooth.enable = true;
   };
 
-  systemd.suppressedSystemUnits = [
-    "systemd-machine-id-commit.service"
-  ];
-
   powerManagement.powertop.enable = true;
-  time.timeZone = "Asia/Shanghai";
-  i18n.defaultLocale = "en_SG.UTF-8";
   
   nix = {
     settings = {
@@ -122,7 +117,6 @@
   ];
 
   users = {
-    mutableUsers = false;
     users.allen = {
       hashedPasswordFile = "/persist/hashed/allen";
       isNormalUser = true;

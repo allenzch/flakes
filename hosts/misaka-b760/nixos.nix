@@ -9,6 +9,7 @@
       networking.iwd
       security.sudo
       security.hardware-keys
+      system.common
     ]);
 
   custom = {
@@ -52,13 +53,6 @@
     bluetooth.enable = true;
   };
 
-  systemd.suppressedSystemUnits = [
-    "systemd-machine-id-commit.service"
-  ];
-
-  time.timeZone = "Asia/Shanghai";
-  i18n.defaultLocale = "en_SG.UTF-8";
-
   sops = {
     secrets = {
       "user-password/allenzch" = {
@@ -66,11 +60,6 @@
         sopsFile = ../../secrets/local.yaml;
       };
     };
-    age = {
-      keyFile = "/persist/sops.key";
-      sshKeyPaths = [ ];
-    };
-    gnupg.sshKeyPaths = [ ];
   };
   
   nix = {
@@ -141,7 +130,6 @@
   ];
 
   users = {
-    mutableUsers = false;
     users.allenzch = {
       hashedPasswordFile = config.sops.secrets."user-password/allenzch".path;
       isNormalUser = true;
