@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, inputs, nixpkgs, impermanence, nix-colors, nixosProfiles, hmModules, homeProfiles, mylib, mypkgs, data, pkgs-stable, ... }: {
+{ pkgs, modulesPath, nixpkgs, nixosProfiles, ... }: {
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
@@ -8,7 +8,6 @@
     ] ++
     (with nixosProfiles; [
       services.openssh
-      security.sudo
       system.common
       users.root
     ]);
