@@ -119,7 +119,7 @@
       ipsec.interfaces = [ "eno1" ];
       clat = {
         enable = true;
-        segment = [ "2a0e:aa07:e21c:2546::2" ];
+        segment = [ "2a0e:aa07:e21c:2546::3" ];
       };
     };
     proxy = {
