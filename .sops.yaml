@@ -6,4 +6,11 @@ creation_rules:
     key_groups:
       - age:
         - *misaka-b760
-
+  - path_regex: secrets/hosts/misaka-b760.*
+    key_groups:
+      - age:
+        - *misaka-b760
+  - path_regex: secrets/hosts/koishi-n100.*
+    key_groups:
+      - age:
+        - *misaka-b760
