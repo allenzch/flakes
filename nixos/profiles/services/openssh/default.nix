@@ -1,4 +1,4 @@
-{ ... }:
+{ config, self, ... }:
 {
   services.openssh = {
     enable = true;
@@ -8,5 +8,13 @@
       PermitRootLogin = "prohibit-password";
       PasswordAuthentication = false;
     };
+    hostKeys = [
+      {
+        inherit (config.sops.secrets."ssh_host_ed25519_key") path;
+        type = "ed25519";
+      }
+    ];
   };
+
+  sops.secrets."ssh_host_ed25519_key".sopsFile = "${self}/secrets/hosts/${config.networking.hostName}.yaml";
 }
