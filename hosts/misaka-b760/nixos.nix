@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, inputs, nixpkgs, impermanence, nix-colors, nixosProfiles, homeModules, homeProfiles, mylib, mypkgs, data, pkgs-stable, ... }: {
+{ config, lib, pkgs, modulesPath, inputs, nixpkgs, impermanence, nixosProfiles, homeModules, homeProfiles, mylib, mypkgs, data, pkgs-stable, ... }: {
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
@@ -202,12 +202,10 @@
     users.allenzch = {
       imports = [
         impermanence.nixosModules.home-manager.impermanence
-        nix-colors.homeManagerModules.default
         ./users/allenzch.nix
       ] ++ homeModules;
     };
     extraSpecialArgs = {
-      inherit nix-colors;
       inherit mylib;
       inherit mypkgs;
       inherit data;
