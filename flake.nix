@@ -1,7 +1,7 @@
 {
   description = "a nix flake for system deployment";
 
-  outputs = { self, nixpkgs, disko, impermanence, sops-nix, home-manager, nixpkgs-stable, ... } @ inputs:
+  outputs = { self, nixpkgs, disko, impermanence, sops-nix, home-manager, ... } @ inputs:
     let
       mylib = import ./lib {
         inherit inputs;
@@ -11,14 +11,6 @@
       data = import ./data.nix;
       pkgs = import nixpkgs {
         system = "x86_64-linux";
-      };
-      pkgs-stable = import nixpkgs-stable {
-        system = "x86_64-linux";
-        config = {
-          permittedInsecurePackages = [
-            "electron-27.3.11"
-          ];
-        };
       };
     in
     {
@@ -44,7 +36,6 @@
             inherit (self) homeProfiles;
             inherit data;
             inherit inputs;
-            inherit pkgs-stable;
           };
         };
         koishi-n100 = nixpkgs.lib.nixosSystem {
@@ -78,7 +69,6 @@
             inherit (self) homeProfiles;
             inherit data;
             inherit inputs;
-            inherit pkgs-stable;
           };
         };
       };
@@ -86,7 +76,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, inputs, impermanence, nixosProfiles, homeModules, homeProfiles, mylib, mypkgs, data, pkgs-stable, ... }: {
+{ config, lib, pkgs, modulesPath, inputs, impermanence, nixosProfiles, homeModules, homeProfiles, mylib, mypkgs, data, ... }: {
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
@@ -192,7 +192,6 @@
       inherit mypkgs;
       inherit data;
       inherit inputs;
-      inherit pkgs-stable;
       inherit homeProfiles;
     };
   };
