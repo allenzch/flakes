@@ -13,11 +13,8 @@
       services.enthalpy
       system.nixpkgs
       services.openssh
+      users.allenzch
     ]);
-
-  custom = {
-    hm-nixos.allenzch.enable = true;
-  };
 
   nixpkgs = {
     hostPlatform = lib.mkDefault "x86_64-linux";
@@ -56,15 +53,6 @@
     bluetooth.enable = true;
   };
 
-  sops = {
-    secrets = {
-      "user-password/allenzch" = {
-        neededForUsers = true;
-        sopsFile = ../../secrets/local.yaml;
-      };
-    };
-  };
-  
   nix = {
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
@@ -156,17 +144,9 @@
     wget
   ];
 
-  users = {
-    users.allenzch = {
-      hashedPasswordFile = config.sops.secrets."user-password/allenzch".path;
-      isNormalUser = true;
-      extraGroups = [ "wheel" "video" ];
-      shell = pkgs.fish;
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICNDUqt2SdN4i2lt5HiAOfIDxZSCgRcatL5OdXaEM2Xk allenzch@sakura-wj14"
-      ];
-    };
-  };
+  users.users.allenzch.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICNDUqt2SdN4i2lt5HiAOfIDxZSCgRcatL5OdXaEM2Xk"
+  ];
 
   environment.persistence."/persist" = {
     directories = [
@@ -193,30 +173,11 @@
 
   programs = {
     dconf.enable = true;
-    fish.enable = true;
   };
   
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = false;
-    users.allenzch = {
-      imports = [
-        impermanence.nixosModules.home-manager.impermanence
-        ./users/allenzch.nix
-      ] ++ homeModules;
-    };
-    extraSpecialArgs = {
-      inherit mylib;
-      inherit mypkgs;
-      inherit data;
-      inherit inputs;
-      inherit homeProfiles;
-    };
-  };
-
   systemd.services.nix-daemon = config.networking.netns.enthalpy.config;
 
-  systemd.services."user@1000" =
+  systemd.services."user@${toString config.users.users.allenzch.uid}" =
     config.networking.netns.enthalpy.config
     // {
       overrideStrategy = "asDropin";

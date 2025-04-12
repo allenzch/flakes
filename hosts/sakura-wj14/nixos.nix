@@ -11,11 +11,8 @@
       system.common
       services.enthalpy
       system.nixpkgs
+      users.allenzch
     ]);
-
-  custom = {
-    hm-nixos.allenzch.enable = true;
-  };
 
   nixpkgs = {
     hostPlatform = lib.mkDefault "x86_64-linux";
@@ -135,21 +132,6 @@
     wget
   ];
 
-  sops.secrets = {
-    "user-password/allenzch" = {
-      neededForUsers = true;
-      sopsFile = ../../secrets/local.yaml;
-    };
-  };
-  users = {
-    users.allenzch = {
-      hashedPasswordFile = config.sops.secrets."user-password/allenzch".path;
-      isNormalUser = true;
-      extraGroups = [ "wheel" "video" ];
-      shell = pkgs.fish;
-    };
-  };
-
   environment.persistence."/persist" = {
     directories = [
       "/var/lib/nixos"
@@ -175,33 +157,16 @@
 
   programs = {
     dconf.enable = true;
-    fish.enable = true;
   };
   
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = false;
-    users.allenzch = {
-      imports = [
-        impermanence.nixosModules.home-manager.impermanence
-        ./users/allenzch.nix
-      ] ++ homeModules;
-    };
-    extraSpecialArgs = {
-      inherit mylib;
-      inherit mypkgs;
-      inherit data;
-      inherit inputs;
-      inherit homeProfiles;
-    };
-  };
-
   systemd.services.nix-daemon = config.networking.netns.enthalpy.config;
 
-  systemd.services."user@1000" =
+  systemd.services."user@${toString config.users.users.allenzch.uid}" =
     config.networking.netns.enthalpy.config
     // {
       overrideStrategy = "asDropin";
       restartIfChanged = false;
     };
+
+  home-manager.users.allenzch.imports = with homeProfiles.programs; [ zotero ];
 }
