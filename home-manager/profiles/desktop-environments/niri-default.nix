@@ -29,7 +29,7 @@
           "Mod+Return" = { spawn = [ "systemd-run-app" "kitty" ]; };
           "Mod+T" = { spawn = [ "systemd-run-app" "kitty" ]; };
           "Mod+D" = { spawn = [ "fuzzel" ]; };
-          "Mod+M" = { spawn = [ "swaylock" ]; };
+          "Mod+Shift+M" = { spawn = [ "swaylock" ]; };
           "Mod+W" = { spawn = [ "systemd-run-app" "firefox" ]; };
           "Mod+E" = { spawn = [ "nautilus" ]; };
           "Mod+V" = { spawn = [ "cliphist-fuzzel" ]; };
