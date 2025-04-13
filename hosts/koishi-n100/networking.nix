@@ -15,6 +15,14 @@
         IPv6Forwarding = true;
       };
     };
+    netdevs = {
+      "20-brwan" = {
+        netdevConfig = {
+          Kind = "bridge";
+          Name = "brwan";
+        };
+      };
+    };
     networks = {
       "20-enp1s0" = {
         matchConfig.Name = "enp1s0";
@@ -37,6 +45,10 @@
       };
       "20-enp3s0" = {
         matchConfig.Name = "enp3s0";
+        bridge = [ "brwan" ];
+      };
+      "30-brwan" = {
+        matchConfig.Name = "brwan";
         networkConfig = {
           DHCP = "yes";
           IPv6AcceptRA = true;
@@ -62,7 +74,7 @@
       content = ''
         chain postrouting {
           type nat hook postrouting priority srcnat; policy accept;
-          oifname enp3s0 counter masquerade
+          oifname brwan counter masquerade
         }
       '';
     };
