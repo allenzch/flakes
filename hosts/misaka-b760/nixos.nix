@@ -19,9 +19,6 @@
   nixpkgs = {
     hostPlatform = lib.mkDefault "x86_64-linux";
     config = {
-      permittedInsecurePackages = [
-        "electron-27.3.11"
-      ];
       allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
         "nvidia-x11"
         "nvidia-settings"
