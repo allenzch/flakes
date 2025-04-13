@@ -1,9 +1,11 @@
 { ... }:
 {
-  time.timeZone = "Asia/Shanghai";
+  time.timeZone = "Asia/Singapore";
+
   i18n.defaultLocale = "en_SG.UTF-8";
 
   users.mutableUsers = false;
+
   services.userborn = {
     enable = true;
     passwordFilesLocation = "/var/lib/nixos";
