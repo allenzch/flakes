@@ -144,6 +144,8 @@ in
         };
         layout = {
           border = { off = [ ]; };
+          default-column-display = [ "tabbed" ];
+          tab-indicator = { hide-when-single-tab = [ ]; };
         };
       };
   
