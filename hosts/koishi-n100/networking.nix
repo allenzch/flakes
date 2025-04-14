@@ -1,5 +1,31 @@
-{ lib, ... }:
+{ config, lib, nixosProfiles, ... }:
 {
+  imports = with nixosProfiles; [
+    services.enthalpy
+    system.nixpkgs
+  ];
+
+  services.enthalpy = {
+    prefix = "2a0e:aa07:e21d:2610::/60";
+    ipsec.interfaces = [ "brwan" ];
+    clat = {
+      enable = true;
+      segment = lib.singleton "2a0e:aa07:e21c:2546::3";
+    };
+    srv6.enable = true;
+  };
+
+  systemd.services.nix-daemon = config.networking.netns.enthalpy.config;
+
+  networking.netns.enthalpy.forwardPorts = [
+    {
+      protocol = "tcp";
+      netnsPath = "/proc/1/ns/net";
+      source = "[::]:22";
+      target = "[::]:22";
+    }
+  ];
+
   networking = {
     hostName = "koishi-n100";
     useDHCP = false;

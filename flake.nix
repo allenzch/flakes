@@ -48,8 +48,8 @@
             ./hosts/koishi-n100/nixos.nix
           ] ++ self.nixosModules;
           specialArgs = inputs // {
+            inherit mylib mypkgs inputs;
             inherit (self) nixosProfiles;
-            inherit inputs;
           };
         };
         misaka-b760 = nixpkgs.lib.nixosSystem {
