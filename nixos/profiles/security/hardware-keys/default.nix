@@ -1,6 +1,6 @@
-{ pkgs, mypkgs, ... }:
+{ pkgs, ... }:
 {
-  services.udev.packages = with mypkgs; [ canokey-udev-rules ];
+  services.udev.packages = with pkgs; [ canokey-udev-rules ];
 
   services.pcscd = {
     enable = true;

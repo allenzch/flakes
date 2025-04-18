@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, inputs, nixpkgs, impermanence, nixosProfiles, homeModules, homeProfiles, mylib, mypkgs, data, ... }: {
+{ config, lib, pkgs, modulesPath, inputs, nixpkgs, impermanence, nixosProfiles, homeModules, homeProfiles, mylib, data, ... }: {
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")

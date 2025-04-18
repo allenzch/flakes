@@ -7,11 +7,7 @@
         inherit inputs;
         inherit (nixpkgs) lib;
       };
-      mypkgs = import ./pkgs { inherit pkgs; };
       data = import ./data.nix;
-      pkgs = import nixpkgs {
-        system = "x86_64-linux";
-      };
     in
     {
       nixosModules = mylib.buildModuleList ./nixos/modules;
@@ -30,7 +26,6 @@
           ] ++ self.nixosModules;
           specialArgs = inputs // {
             inherit mylib;
-            inherit mypkgs;
             inherit (self) nixosProfiles;
             inherit (self) homeModules;
             inherit (self) homeProfiles;
@@ -48,7 +43,7 @@
             ./hosts/koishi-n100/nixos.nix
           ] ++ self.nixosModules;
           specialArgs = inputs // {
-            inherit mylib mypkgs inputs;
+            inherit mylib inputs;
             inherit (self) nixosProfiles;
           };
         };
@@ -63,7 +58,6 @@
           ] ++ self.nixosModules;
           specialArgs = inputs // {
             inherit mylib;
-            inherit mypkgs;
             inherit (self) nixosProfiles;
             inherit (self) homeModules;
             inherit (self) homeProfiles;

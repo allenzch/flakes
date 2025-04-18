@@ -1,4 +1,4 @@
-{ config, pkgs, mylib, mypkgs, inputs, data, homeModules, homeProfiles, ... }:
+{ config, pkgs, mylib, inputs, data, homeModules, homeProfiles, ... }:
 let
   name = "allenzch";
   uid = 1000;
@@ -33,7 +33,7 @@ in {
     useGlobalPkgs = true;
     useUserPackages = false;
     extraSpecialArgs = {
-      inherit mylib mypkgs inputs data homeProfiles;
+      inherit mylib inputs data homeProfiles;
     };
   };
 }

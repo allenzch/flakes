@@ -1,6 +1,6 @@
-{ pkgs, mypkgs, homeProfiles, ... }: {
+{ pkgs, homeProfiles, ... }: {
   home.packages = with pkgs; [
-    mypkgs.systemd-run-app
+    systemd-run-app
     nautilus
     file-roller
     loupe

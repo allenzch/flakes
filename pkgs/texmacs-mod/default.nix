@@ -1,5 +1,8 @@
-{ pkgs }:
-with pkgs;
+{
+  fetchurl,
+  texliveSmall,
+  texmacs,
+}:
 (texmacs.overrideAttrs (fianl: prev: let
   chineseFontsSrc = fetchurl {
     url = "https://ftp.texmacs.org/TeXmacs/fonts/TeXmacs-chinese-fonts.tar.gz";

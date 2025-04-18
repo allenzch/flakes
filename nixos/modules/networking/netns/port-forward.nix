@@ -1,8 +1,7 @@
 {
   config,
   lib,
-  mypkgs,
-  mylib,
+  pkgs,
   ...
 }:
 with lib;
@@ -91,7 +90,7 @@ in
                 Type = "simple";
                 Restart = "on-failure";
                 RestartSec = 5;
-                ExecStart = "${mypkgs.netns-proxy}/bin/netns-proxy ${netnsPath} ${source} -b ${target} -p ${protocol} -v";
+                ExecStart = "${pkgs.netns-proxy}/bin/netns-proxy ${netnsPath} ${source} -b ${target} -p ${protocol} -v";
                 NetworkNamespacePath = cfg.netnsPath;
               };
               after = [

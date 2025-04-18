@@ -1,4 +1,4 @@
-{ config, mypkgs, ... }:
+{ config, pkgs, ... }:
 let
   theme = config.custom.misc.theme;
 in {
@@ -25,7 +25,6 @@ in {
       };
     };
   };
-  home.packages = [
-    mypkgs.systemd-run-app
-  ];
+
+  home.packages = with pkgs; [ systemd-run-app ];
 }

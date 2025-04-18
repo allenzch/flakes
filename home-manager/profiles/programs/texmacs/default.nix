@@ -1,7 +1,7 @@
-{ mypkgs, ... }:
+{ pkgs, ... }:
 {
   home.packages = [
-    mypkgs.texmacs
+    pkgs.texmacs-mod
   ];
   home.file.".TeXmacs" = {
     source = ./TeXmacs;
