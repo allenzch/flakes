@@ -10,6 +10,7 @@
       data = import ./data.nix;
     in
     {
+      inherit mylib;
       nixosModules = mylib.buildModuleList ./nixos/modules;
       nixosProfiles = mylib.rakeLeaves ./nixos/profiles;
       homeModules = mylib.buildModuleList ./home-manager/modules;
