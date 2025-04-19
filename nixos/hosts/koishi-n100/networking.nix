@@ -2,7 +2,6 @@
 {
   imports = with nixosProfiles; [
     services.enthalpy
-    system.nixpkgs
   ];
 
   services.enthalpy = {

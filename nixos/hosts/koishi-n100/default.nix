@@ -1,4 +1,4 @@
-{ pkgs, modulesPath, nixpkgs, nixosProfiles, ... }: {
+{ pkgs, modulesPath, inputs, nixosProfiles, ... }: {
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
@@ -19,7 +19,7 @@
       flake-registry = "";
     };
     registry = {
-      nixpkgs.flake = nixpkgs;
+      nixpkgs.flake = inputs.nixpkgs;
     };
   };
 
