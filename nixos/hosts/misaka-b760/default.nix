@@ -1,21 +1,29 @@
-{ config, lib, pkgs, modulesPath, inputs, impermanence, nixosProfiles, homeModules, homeProfiles, mylib, data, ... }: {
+{ config, lib, pkgs, modulesPath, inputs, nixosProfiles, homeModules, homeProfiles, mylib, data, ... }: {
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
       ./disko.nix
     ] ++
     (with nixosProfiles; [
+      hardware.nvidia
       networking.iwd
       security.sudo
       security.hardware-keys
       system.common
       services.enthalpy
-      system.nixpkgs
+      services.openssh
       users.allenzch
     ]);
 
   nixpkgs = {
     hostPlatform = lib.mkDefault "x86_64-linux";
+    config = {
+      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+        "nvidia-x11"
+        "nvidia-settings"
+        "nvidia-persistenced"
+      ];
+    };
   };
 
   boot = {
@@ -25,47 +33,47 @@
     };
     initrd = {
       systemd.enable = true;
-      kernelModules = [ "amdgpu" ];
-      availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" ];
+      kernelModules = [ ];
+      availableKernelModules = [ "vmd" "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
     };
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelModules = [ "kvm-amd" ];
+    kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
-    kernelParams = [ "usbcore.autosuspend=-1" ];
   };
 
   hardware = {
-    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     graphics = {
       enable = true;
     };
     bluetooth.enable = true;
   };
 
-  powerManagement.powertop.enable = true;
-  
   nix = {
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [
-        "root"
-        "@wheel"
-      ];
+      trusted-users = [ "root" "@wheel" ];
+      flake-registry = "";
+    };
+    registry = {
+      nixpkgs.flake = inputs.nixpkgs;
+      home-manager.flake = inputs.home-manager;
     };
   };
 
   networking = {
-    hostName = "sakura-wj14";
     useDHCP = false;
     useNetworkd = false;
   };
-
-
 
   systemd.network = {
     enable = true;
     wait-online.enable = false;
     networks = {
+      "20-eno1" = {
+        name = "eno1";
+        DHCP = "yes";
+      };
       "20-wlan0" = {
         name = "wlan0";
         DHCP = "yes";
@@ -74,8 +82,6 @@
   };
 
   services = {
-    power-profiles-daemon.enable = true;
-    logind.lidSwitch = "ignore";
     resolved.enable = true;
     pipewire = {
       enable = true;
@@ -84,21 +90,17 @@
       alsa.enable = true;
     };
     udev.extraHwdb = ''
-      evdev:atkbd:dmi:*
-        KEYBOARD_KEY_3a=esc
-        KEYBOARD_KEY_01=capslock
-      
       evdev:input:b*v046Dp4089*
         KEYBOARD_KEY_70039=esc
         KEYBOARD_KEY_70029=capslock
 
-      evdev:input:b*v258Ap1006*
+      evdev:input:b*v1A81p2039*
         KEYBOARD_KEY_70039=esc
         KEYBOARD_KEY_70029=capslock
     '';
     enthalpy = {
-      prefix = "2a0e:aa07:e21d:2630::/60";
-      ipsec.interfaces = [ "wlan0" ];
+      prefix = "2a0e:aa07:e21d:2620::/60";
+      ipsec.interfaces = [ "eno1" ];
       clat = {
         enable = true;
         segment = [ "2a0e:aa07:e21c:2546::3" ];
@@ -115,6 +117,15 @@
     };
   };
 
+  networking.netns.enthalpy.forwardPorts = [
+    {
+      protocol = "tcp";
+      netnsPath = "/proc/1/ns/net";
+      source = "[::]:22";
+      target = "[::]:22";
+    }
+  ];
+
   services.gnome.gnome-keyring.enable = true;
 
   security = {
@@ -126,6 +137,10 @@
     neovim
     git
     wget
+  ];
+
+  users.users.allenzch.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICNDUqt2SdN4i2lt5HiAOfIDxZSCgRcatL5OdXaEM2Xk"
   ];
 
   environment.persistence."/persist" = {
@@ -163,6 +178,4 @@
       overrideStrategy = "asDropin";
       restartIfChanged = false;
     };
-
-  home-manager.users.allenzch.imports = with homeProfiles.programs; [ zotero ];
 }

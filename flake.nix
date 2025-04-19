@@ -1,73 +1,57 @@
 {
   description = "a nix flake for system deployment";
 
-  outputs = { self, nixpkgs, disko, impermanence, sops-nix, home-manager, ... } @ inputs:
-    let
-      mylib = import ./lib {
-        inherit inputs;
-        inherit (nixpkgs) lib;
-      };
-      data = import ./data.nix;
-    in
-    {
-      inherit mylib;
-      nixosModules = mylib.buildModuleList ./nixos/modules;
-      nixosProfiles = mylib.rakeLeaves ./nixos/profiles;
-      homeModules = mylib.buildModuleList ./home-manager/modules;
-      homeProfiles = mylib.rakeLeaves ./home-manager/profiles;
-      nixosConfigurations = {
-        sakura-wj14 = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            disko.nixosModules.disko
-            impermanence.nixosModules.impermanence
-            sops-nix.nixosModules.sops
-            home-manager.nixosModules.home-manager
-            ./hosts/sakura-wj14/nixos.nix
-          ] ++ self.nixosModules;
-          specialArgs = inputs // {
-            inherit mylib;
-            inherit (self) nixosProfiles;
-            inherit (self) homeModules;
-            inherit (self) homeProfiles;
-            inherit data;
-            inherit inputs;
-          };
-        };
-        koishi-n100 = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            disko.nixosModules.disko
-            impermanence.nixosModules.impermanence
-            sops-nix.nixosModules.sops
-            home-manager.nixosModules.home-manager
-            ./hosts/koishi-n100/nixos.nix
-          ] ++ self.nixosModules;
-          specialArgs = inputs // {
-            inherit mylib inputs;
-            inherit (self) nixosProfiles;
-          };
-        };
-        misaka-b760 = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            disko.nixosModules.disko
-            impermanence.nixosModules.impermanence
-            sops-nix.nixosModules.sops
-            home-manager.nixosModules.home-manager
-            ./hosts/misaka-b760/nixos.nix
-          ] ++ self.nixosModules;
-          specialArgs = inputs // {
-            inherit mylib;
-            inherit (self) nixosProfiles;
-            inherit (self) homeModules;
-            inherit (self) homeProfiles;
-            inherit data;
-            inherit inputs;
-          };
-        };
+  outputs = { self, ... } @ inputs:
+  let
+    inherit (inputs.nixpkgs.lib) mergeAttrsList nixosSystem singleton;
+    mylib = import ./lib {
+      inherit inputs;
+      inherit (inputs.nixpkgs) lib;
+    };
+    data = import ./data.nix;
+    nixosModules = mylib.buildModuleList ./nixos/modules;
+    nixosProfiles = mylib.rakeLeaves ./nixos/profiles;
+    homeModules = mylib.buildModuleList ./home-manager/modules;
+    homeProfiles = mylib.rakeLeaves ./home-manager/profiles;
+    mkNixosHost = { name, extraSpecialArgs }: {
+      ${name} = nixosSystem {
+        modules = (with inputs; [
+          disko.nixosModules.disko
+          home-manager.nixosModules.home-manager
+          impermanence.nixosModules.impermanence
+          sops-nix.nixosModules.sops
+        ]) ++ nixosModules ++
+        singleton {
+          nixpkgs.overlays = [
+            inputs.enthalpy.overlays.default
+            (import ./pkgs/overlay.nix)
+          ];
+          networking.hostName = "${name}";
+        } ++ singleton ./nixos/hosts/${name};
+        specialArgs = {
+          inherit self inputs mylib nixosProfiles homeModules homeProfiles;
+        } // extraSpecialArgs;
+        system = "x86_64-linux";
       };
     };
+  in
+  {
+    inherit mylib nixosModules nixosProfiles homeModules homeProfiles mkNixosHost;
+    nixosConfigurations = mergeAttrsList [
+      (mkNixosHost {
+        name = "sakura-wj14";
+        extraSpecialArgs = { inherit data; };
+      })
+      (mkNixosHost {
+        name = "koishi-n100";
+        extraSpecialArgs = { };
+      })
+      (mkNixosHost {
+        name = "misaka-b760";
+        extraSpecialArgs = { inherit data; };
+      })
+    ];
+  };
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";

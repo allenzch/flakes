@@ -2,7 +2,6 @@
 {
   imports = with nixosProfiles; [
     services.enthalpy
-    system.nixpkgs
   ];
 
   services.enthalpy = {
@@ -27,7 +26,6 @@
   ];
 
   networking = {
-    hostName = "koishi-n100";
     useDHCP = false;
     useNetworkd = false;
   };
