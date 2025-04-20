@@ -13,7 +13,13 @@
     nixosProfiles = mylib.rakeLeaves ./nixos/profiles;
     homeModules = mylib.buildModuleList ./home-manager/modules;
     homeProfiles = mylib.rakeLeaves ./home-manager/profiles;
-    mkNixosHost = { name, extraSpecialArgs }: {
+    mkNixosHost =
+    {
+      name,
+      configuration ? ./nixos/hosts/${name},
+      extraSpecialArgs ? { }
+    }:
+    {
       ${name} = nixosSystem {
         modules = (with inputs; [
           disko.nixosModules.disko
@@ -27,7 +33,7 @@
             (import ./pkgs/overlay.nix)
           ];
           networking.hostName = "${name}";
-        } ++ singleton ./nixos/hosts/${name};
+        } ++ singleton configuration;
         specialArgs = {
           inherit self inputs mylib nixosProfiles homeModules homeProfiles;
         } // extraSpecialArgs;
@@ -44,7 +50,6 @@
       })
       (mkNixosHost {
         name = "koishi-n100";
-        extraSpecialArgs = { };
       })
       (mkNixosHost {
         name = "misaka-b760";
