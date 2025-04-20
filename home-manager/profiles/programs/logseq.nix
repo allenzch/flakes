@@ -14,7 +14,7 @@ in
   home.packages = [
     logseq-wrapped
   ];
-  envPersist.directories = [
+  persistence.directories = [
     ".logseq"
     ".config/Logseq"
   ];

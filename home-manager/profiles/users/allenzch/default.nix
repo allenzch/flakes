@@ -40,7 +40,7 @@
       ];
     };
   };
-  envPersist.directories = [
+  persistence.directories = [
     ".local"
     ".ssh"
     "main"

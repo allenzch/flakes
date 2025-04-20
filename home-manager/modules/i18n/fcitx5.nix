@@ -50,7 +50,7 @@ in
   config = mkIf cfg.enable {
     home.packages = [ fcitx5Package gtk2Cache gtk3Cache ];
 
-    envPersist.directories = [
+    persistence.directories = [
       ".config/fcitx5"
     ];
 

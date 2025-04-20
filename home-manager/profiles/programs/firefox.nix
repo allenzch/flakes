@@ -47,5 +47,5 @@
       };
     };
   };
-  envPersist.directories = [ ".mozilla/firefox" ];
+  persistence.directories = [ ".mozilla/firefox" ];
 }

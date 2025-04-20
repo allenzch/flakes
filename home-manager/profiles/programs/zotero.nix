@@ -3,7 +3,7 @@
   home.packages = with pkgs; [
     zotero-beta
   ];
-  envPersist.directories = [
+  persistence.directories = [
     ".zotero" 
     "Zotero" 
   ];

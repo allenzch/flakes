@@ -20,13 +20,13 @@ in {
 
   programs.fish.enable = true;
 
-  custom.hm-nixos.${name}.enable = true;
-  
+  environment.persistence."/persist".users.${name} = {
+    inherit (config.home-manager.users.${name}.persistence) files directories;
+  };
+
   home-manager = {
     users.${name} = {
-      imports = [
-        inputs.impermanence.nixosModules.home-manager.impermanence
-      ] ++ homeModules ++ [
+      imports = homeModules ++ [
         homeProfiles.users.${name}
       ];
     };
