@@ -23,11 +23,9 @@
       efi.canTouchEfiVariables = true;
     };
     initrd = {
-      systemd.enable = true;
       kernelModules = [ "amdgpu" ];
       availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" ];
     };
-    kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
     kernelParams = [ "usbcore.autosuspend=-1" ];

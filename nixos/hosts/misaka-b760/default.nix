@@ -32,11 +32,9 @@
       efi.canTouchEfiVariables = true;
     };
     initrd = {
-      systemd.enable = true;
       kernelModules = [ ];
       availableKernelModules = [ "vmd" "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
     };
-    kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
   };

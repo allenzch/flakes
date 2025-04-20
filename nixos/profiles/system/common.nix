@@ -1,6 +1,12 @@
-{ ... }:
-{
-  boot.tmp.useTmpfs = true;
+{ lib, pkgs, ... }:
+let
+  inherit (lib) mkDefault;
+in {
+  boot = {
+    initrd.systemd.enable = true;
+    kernelPackages = mkDefault pkgs.linuxPackages_latest;
+    tmp.useTmpfs = true;
+  };
 
   time.timeZone = "Asia/Singapore";
 
