@@ -62,8 +62,6 @@
     '';
     shellAliases = {
       s = "${pkgs.fastfetch}/bin/fastfetch";
-      p = "powerprofilesctl";
-      rebuild = "nixos-rebuild --flake /persist/home/allen/main/repos/flakes --use-remote-sudo";
     };
   };
 }
