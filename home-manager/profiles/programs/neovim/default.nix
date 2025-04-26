@@ -2,7 +2,7 @@
 with lib; let
   theme = config.custom.misc.theme;
 in {
-  programs.neovim = {
+  programs.neovim = mkMerge [{
     enable = true;
     defaultEditor = true;
     vimAlias = true;
@@ -35,10 +35,14 @@ in {
     ];
 
     extraConfig = ''
-      :colorscheme ${theme.inUse.vimTheme}
       :source ${./nvim.lua}
     '';
-  };
+  }
+  (mkIf theme.enable {
+    extraConfig = ''
+      :colorscheme ${theme.inUse.vimTheme}
+    '';
+  })];
 
   home.file.".config/nvim/after/ftplugin/python.vim".text = ''
     set tabstop=2
