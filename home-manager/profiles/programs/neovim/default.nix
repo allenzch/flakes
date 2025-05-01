@@ -23,6 +23,7 @@ in {
       lualine-lsp-progress
       bufferline-nvim
       telescope-nvim
+      transparent-nvim
     ];
 
     extraPackages = with pkgs; [
