@@ -10,13 +10,21 @@
       vscode
       telegram
       texmacs
+      syncthing
+      zotero
     ]) ++
     (with homeProfiles; [
       desktop-environments.niri-default
       misc.theme-catppuccin
       misc.font-noto
     ]);
+
+  home.packages = with pkgs; [
+    apostrophe
+  ];
+
   programs.bash.enable = true;
+
   programs.git = {
     enable = true;
     userName = data.git.userName;
@@ -30,6 +38,7 @@
       init.defaultBranch = "master";
     };
   };
+
   custom = {
     i18n.fcitx5 = {
       enable = true;
@@ -40,6 +49,7 @@
       ];
     };
   };
+
   persistence.directories = [
     ".local"
     ".ssh"
