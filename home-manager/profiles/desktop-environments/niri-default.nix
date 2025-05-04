@@ -6,7 +6,6 @@
     loupe
     papers
     mpv
-    libreoffice
   ];
   imports = with homeProfiles.programs; [
     kitty
