@@ -18,22 +18,13 @@ in {
     sopsFile = "${inputs.self}/secrets/local.yaml";
   };
 
-  programs.fish.enable = true;
-
   environment.persistence."/persist".users.${name} = {
     inherit (config.home-manager.users.${name}.persistence) files directories;
   };
 
-  home-manager = {
-    users.${name} = {
-      imports = homeModules ++ [
-        homeProfiles.users.${name}
-      ];
-    };
-    useGlobalPkgs = true;
-    useUserPackages = false;
-    extraSpecialArgs = {
-      inherit mylib inputs data homeProfiles;
-    };
+  home-manager.users.${name} = {
+    imports = homeModules ++ [
+      homeProfiles.users.${name}
+    ];
   };
 }
