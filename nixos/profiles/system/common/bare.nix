@@ -1,11 +1,7 @@
-{ config, lib, pkgs, nixosProfiles, ... }:
+{ lib, pkgs, ... }:
 let
   inherit (lib) mkDefault;
 in {
-  imports = with nixosProfiles; [
-    services.logrotate
-  ];
-
   nixpkgs.hostPlatform = "x86_64-linux";
 
   boot = {
@@ -37,38 +33,6 @@ in {
   services.userborn = {
     enable = true;
     passwordFilesLocation = "/var/lib/nixos/userborn";
-  };
-
-  nix = {
-    enable = true;
-    settings = {
-      experimental-features = [
-        "nix-command"
-        "flakes"
-        "auto-allocate-uids"
-        "cgroups"
-      ];
-      auto-allocate-uids = true;
-      use-cgroups = true;
-      flake-registry = "";
-    };
-    registry.p.to = {
-      type = "path";
-      path = config.nixpkgs.flake.source;
-    };
-  };
-
-  networking = {
-    useDHCP = false;
-    useNetworkd = false;
-  };
-
-  sops = {
-    age = {
-      keyFile = "/var/lib/nixos/sops-nix/sops.key";
-      sshKeyPaths = [ ];
-    };
-    gnupg.sshKeyPaths = [ ];
   };
 
   environment.persistence."/persist" = {
