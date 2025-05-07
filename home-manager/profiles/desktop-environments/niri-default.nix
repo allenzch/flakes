@@ -6,7 +6,15 @@
     loupe
     papers
     mpv
+    (writeShellApplication {
+      name = "wayland-session";
+      runtimeInputs = [ pkgs.niri ];
+      text = ''
+        niri-session
+      '';
+    })
   ];
+
   imports = with homeProfiles.programs; [
     kitty
     fuzzel
@@ -15,6 +23,7 @@
     swww
     waybar
   ];
+
   custom = {
     misc = {
       theme.enable = true;
@@ -36,5 +45,6 @@
       };
     };
   };
+
   home.sessionVariables.NIXOS_OZONE_WL = 1;
 }
