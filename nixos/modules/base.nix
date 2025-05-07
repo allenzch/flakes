@@ -11,5 +11,7 @@ in {
 
   nix.enable = mkDefault false;
 
+  services.logrotate.enable = mkDefault false;
+
   security.sudo.enable = mkDefault false;
 }
