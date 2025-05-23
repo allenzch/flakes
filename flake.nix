@@ -82,5 +82,9 @@
       url = "git+ssh://git@github.com/allenzch/wallpapers.git?shallow=1";
       flake = false;
     };
+    niri-flake = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }
