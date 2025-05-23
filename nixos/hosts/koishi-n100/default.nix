@@ -1,31 +1,16 @@
-{ pkgs, modulesPath, inputs, nixosProfiles, ... }: {
-  imports =
+{ pkgs, nixosProfiles, ... }: {
+  imports = (
     [
-      (modulesPath + "/installer/scan/not-detected.nix")
-      ./disko.nix
-      ./hardware-configuration.nix
+      ./system.nix
       ./networking.nix
     ] ++
     (with nixosProfiles; [
-      services.openssh
-      system.common
       users.root
-    ]);
+      services.openssh
+    ])
+  );
 
-  nix = {
-    settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "root" "@wheel" ];
-      flake-registry = "";
-    };
-    registry = {
-      nixpkgs.flake = inputs.nixpkgs;
-    };
-  };
-
-  security = {
-    polkit.enable = true;
-  };
+  security.polkit.enable = true;
 
   environment.systemPackages = with pkgs; [
     neovim
@@ -33,15 +18,12 @@
     wget
   ];
 
-  environment.persistence."/persist" = {
-    directories = [
-      "/var/lib/nixos"
-      "/var/lib/systemd"
-      "/var/log"
-    ];
-    files = [
-      "/etc/machine-id"
-      "/var/lib/logrotate.status"
-    ];
-  };
+  networking.netns.enthalpy.forwardPorts = [
+    {
+      protocol = "tcp";
+      netnsPath = "/proc/1/ns/net";
+      source = "[::]:22";
+      target = "[::]:22";
+    }
+  ];
 }

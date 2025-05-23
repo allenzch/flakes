@@ -2,6 +2,7 @@
 {
   imports = with nixosProfiles; [
     services.enthalpy
+    services.resolved
   ];
 
   services.enthalpy = {
@@ -15,20 +16,6 @@
   };
 
   systemd.services.nix-daemon = config.networking.netns.enthalpy.config;
-
-  networking.netns.enthalpy.forwardPorts = [
-    {
-      protocol = "tcp";
-      netnsPath = "/proc/1/ns/net";
-      source = "[::]:22";
-      target = "[::]:22";
-    }
-  ];
-
-  networking = {
-    useDHCP = false;
-    useNetworkd = false;
-  };
 
   systemd.network = {
     enable = true;
@@ -83,10 +70,6 @@
         ipv6AcceptRAConfig.RouteMetric = 1024;
       };
     };
-  };
-
-  services = {
-    resolved.enable = true;
   };
 
   networking.firewall.enable = false;
