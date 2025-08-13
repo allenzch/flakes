@@ -3,47 +3,46 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
   inherit (lib) types;
   inherit (lib.options) mkOption mkEnableOption;
   inherit (lib.modules) mkIf;
-  inherit (lib.attrsets) attrNames;
-  inherit (lib.strings) concatMapStringsSep optionalString splitString;
+  inherit (lib.strings) concatMapStringsSep splitString;
   inherit (lib.trivial) fromHexString;
   inherit (lib.network) ipv6;
 
   cfg = config.services.enthalpy;
-  netnsCfg = config.networking.netns.enthalpy;
 
   splitAddress = idx: builtins.elemAt (splitString ":" (ipv6.fromString cfg.prefix).address) idx;
   routerId = (fromHexString (splitAddress 2)) * 65536 + (fromHexString (splitAddress 3));
-  netdevDependencies = map (name: netnsCfg.netdevs."vrf-${name}".service) (attrNames cfg.metadata);
 in
 {
   options.services.enthalpy.bird = {
     enable = mkEnableOption "bird integration" // {
       default = true;
     };
-    transit = mkOption {
+    prefixes = mkOption {
       type = types.listOf types.str;
-      default = [ "rebmit" ];
+      default = [
+        "2a0e:aa07:e210::/48"
+        "2a0e:aa07:e21c::/48"
+        "2a0e:aa07:e21d::/48"
+      ];
+      readOnly = true;
       description = ''
-        List of transit network entities in the enthalpy network.
+        List of prefixes that this autonomous system is allowed to announce.
       '';
     };
   };
 
   config = mkIf (cfg.enable && cfg.bird.enable) {
-    systemd.services.netns-enthalpy-bird = {
-      requires = netdevDependencies;
-      after = netdevDependencies;
-    };
-
     networking.netns.enthalpy = {
       services.bird = {
         enable = true;
+        package = pkgs.rebmit.bird2-rebmit;
         config = ''
           router id ${toString routerId};
 
@@ -54,7 +53,6 @@ in
           ipv6 sadr table sadr6;
 
           protocol kernel {
-            kernel table ${toString netnsCfg.routingTables.vrf-local};
             ipv6 sadr {
               export all;
               import none;
@@ -70,43 +68,36 @@ in
             return net.dst ~ [${cfg.network}+];
           }
 
+          function is_rebmit_prefix() -> bool {
+            return net.dst ~ [${concatMapStringsSep ",\n" (p: "${p}+") cfg.bird.prefixes}];
+          }
+
           protocol static {
             ipv6 sadr;
             route ${cfg.prefix} from ::/0 unreachable;
           }
 
-          ${concatMapStringsSep "\n" (name: ''
-            function is_entity_${name}_prefix() -> bool {
-              return net.dst ~ [${concatMapStringsSep ",\n" (p: "${p}+") cfg.metadata."${name}".prefixes}];
-            }
-
-            protocol babel entity_${name} {
-              vrf "vrf-${name}";
-              ipv6 sadr {
-                export filter {
-                  if !is_safe_prefix() then reject;
-                  accept;
-                };
-                import filter {
-                  if !is_safe_prefix() then reject;
-                  ${optionalString (name != cfg.entity && !builtins.elem name cfg.bird.transit) ''
-                    if !is_entity_${name}_prefix() then reject;
-                  ''}
-                  accept;
-                };
+          protocol babel {
+            ipv6 sadr {
+              export filter {
+                if !is_safe_prefix() then reject;
+                accept;
               };
-              randomize router id;
-              interface "enta*" {
-                type tunnel;
-                link quality etx;
-                rxcost 32;
-                rtt cost 1024;
-                rtt max 1024 ms;
-                rx buffer 2000;
+              import filter {
+                if !is_safe_prefix() then reject;
+                accept;
               };
-            }
-          '') (attrNames cfg.metadata)}
-
+            };
+            randomize router id;
+            interface "enta*" {
+              type tunnel;
+              link quality etx;
+              rxcost 32;
+              rtt cost 1024;
+              rtt max 1024 ms;
+              rx buffer 2000;
+            };
+          }
         '';
       };
     };

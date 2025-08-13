@@ -1,7 +1,6 @@
 # Portions of this file are sourced from
 # https://github.com/NickCao/flakes/blob/3b03efb676ea602575c916b2b8bc9d9cd13b0d85/modules/gravity/default.nix (MIT License)
 {
-  inputs,
   config,
   lib,
   pkgs,
@@ -12,14 +11,9 @@ let
   inherit (lib) types;
   inherit (lib.options) mkOption mkEnableOption;
   inherit (lib.modules) mkIf;
-  inherit (lib.attrsets) mapAttrsToList attrNames;
-  inherit (lib.strings) concatStringsSep concatMapStringsSep;
-  inherit (lib.lists) flatten singleton all;
+  inherit (lib.strings) concatStringsSep;
 
   cfg = config.services.enthalpy;
-  netnsCfg = config.networking.netns.enthalpy;
-  organizations = flatten (mapAttrsToList (_name: value: value.organizations) cfg.metadata);
-  netdevDependencies = map (name: netnsCfg.netdevs."vrf-${name}".service) (attrNames cfg.metadata);
 in
 {
   options.services.enthalpy.ipsec = {
@@ -76,32 +70,16 @@ in
         URL of the registry to be used.
       '';
     };
-    whitelist = mkOption {
-      type = types.listOf types.str;
-      default = organizations;
-      description = ''
-        A list of organizations that are whitelisted.
-      '';
-    };
   };
 
   config = mkIf (cfg.enable && cfg.ipsec.enable) {
-    assertions = singleton {
-      assertion = all (org: builtins.elem org organizations) cfg.ipsec.whitelist;
-      message = ''
-        All organizations listed in the whitelist must exist in
-        `config.services.enthalpy.metadata`.
-
-        We perform this assertion because newly joined organizations do not
-        have a corresponding VRF to set, as we currently do not support creating
-        VRFs and configuring routing daemon dynamically.
-      '';
-    };
-
     services.strongswan-swanctl = {
       enable = true;
       strongswan.extraConfig = ''
         charon {
+          ikesa_table_size = 32
+          ikesa_table_segments = 4
+          reuse_ikesa = no
           interfaces_use = ${concatStringsSep "," cfg.ipsec.interfaces}
           port = 0
           port_nat_t = 14000
@@ -135,15 +113,11 @@ in
         address = ep.address;
         port = 14000;
         updown = pkgs.writeShellScript "updown" ''
-          IFS=, read -ra PEER_ID_DICT <<< "$PLUTO_PEER_ID"
-          ORG=$(echo "''${PEER_ID_DICT[0]}" | cut -d = -f 2-)
-          ENTITY=$(${pkgs.jq}/bin/jq "to_entries | map({ (.value.organizations[]): .key }) | add | .\"$ORG\"" ${inputs.enthalpy}/zones/data.json --raw-output)
           LINK=enta$(printf '%08x\n' "$PLUTO_IF_ID_OUT")
           case "$PLUTO_VERB" in
             up-client)
               ip link add "$LINK" type xfrm if_id "$PLUTO_IF_ID_OUT"
               ip link set "$LINK" netns enthalpy multicast on mtu 1400 up
-              ip -n enthalpy link set "$LINK" vrf "vrf-$ENTITY"
               ;;
             down-client)
               ip -n enthalpy link del "$LINK"
@@ -185,8 +159,7 @@ in
           "network-online.target"
           "netns-enthalpy.service"
           "strongswan-swanctl.service"
-        ] ++ netdevDependencies;
-        requires = netdevDependencies;
+        ];
         partOf = [ "netns-enthalpy.service" ];
         wantedBy = [
           "multi-user.target"
@@ -204,10 +177,7 @@ in
       script = ''
         set -euo pipefail
         curl --fail --retry 5 --retry-delay 30 --retry-connrefused "${cfg.ipsec.registry}" --output /var/lib/ranet/registry.json.new
-        jq "[.[] | select(.organization | IN(${
-          concatMapStringsSep "," (org: ''\"${org}\"'') cfg.ipsec.whitelist
-        }))]" /var/lib/ranet/registry.json.new > /var/lib/ranet/registry.json.filtered
-        mv /var/lib/ranet/registry.json.filtered /var/lib/ranet/registry.json
+        mv /var/lib/ranet/registry.json.new /var/lib/ranet/registry.json
         /run/current-system/systemd/bin/systemctl reload-or-restart --no-block ranet || true
       '';
       serviceConfig.Type = "oneshot";
@@ -222,5 +192,7 @@ in
       };
       wantedBy = [ "timers.target" ];
     };
+
+    environment.persistence."/persist".directories = [ "/var/lib/ranet" ];
   };
 }

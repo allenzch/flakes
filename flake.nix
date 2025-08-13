@@ -30,6 +30,9 @@
         singleton {
           nixpkgs.overlays = [
             inputs.enthalpy.overlays.default
+            (final: prev: {
+              rebmit = inputs.rebmit.overlays.default final prev;
+            })
             (import ./pkgs/overlay.nix)
           ];
           networking.hostName = "${name}";
@@ -84,6 +87,10 @@
     };
     niri-flake = {
       url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    rebmit = {
+      url = "https://git.rebmit.moe/rebmit/nix-exprs/archive/master.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

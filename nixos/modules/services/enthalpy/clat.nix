@@ -56,7 +56,6 @@ in
         routes = [
           {
             cidr = "${cfg.clat.address}/128";
-            table = netnsCfg.routingTables.vrf-local;
           }
           {
             cidr = "0.0.0.0/0";
@@ -69,8 +68,8 @@ in
       interfaces.enthalpy = {
         routes = singleton {
           cidr = cfg.clat.prefix;
+          from = "${cfg.clat.address}/128";
           extraOptions = {
-            from = "${cfg.clat.address}/128";
             mtu = 1280;
             encap = "seg6 mode encap segs ${concatStringsSep "," cfg.clat.segment}";
           };

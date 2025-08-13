@@ -11,7 +11,6 @@
   };
   services.enthalpy = {
     enable = true;
-    entity = "allenzch";
 
     ipsec = {
       organization = "allenzch's network";
