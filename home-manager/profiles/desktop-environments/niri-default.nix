@@ -1,4 +1,4 @@
-{ pkgs, homeProfiles, ... }: {
+{ pkgs, homeProfiles, inputs, ... }: {
   home.packages = with pkgs; [
     systemd-run-app
     nautilus
@@ -33,6 +33,7 @@
     services = {
       niri = {
         enable = true;
+        package = inputs.niri-flake.packages.x86_64-linux.niri-unstable;
         config.binds = {
           "Mod+Return" = { spawn = [ "systemd-run-app" "kitty" ]; };
           "Mod+T" = { spawn = [ "systemd-run-app" "kitty" ]; };
@@ -41,6 +42,7 @@
           "Mod+W" = { spawn = [ "systemd-run-app" "firefox" ]; };
           "Mod+E" = { spawn = [ "nautilus" ]; };
           "Mod+V" = { spawn = [ "cliphist-fuzzel" ]; };
+          "Mod+grave" = { toggle-overview = [ ]; };
         };
       };
     };

@@ -70,33 +70,26 @@ in
           "Mod+BracketLeft" = { spawn = [ "${pkgs.playerctl}/bin/playerctl" "previous" ]; };
           "Mod+BracketRight" = { spawn = [ "${pkgs.playerctl}/bin/playerctl" "next" ]; };
   
+          "Mod+U" = { focus-window-down = [ ]; };
+          "Mod+I" = { focus-window-up = [ ]; };
+          "Mod+Ctrl+U" = { move-window-down = [ ]; };
+          "Mod+Ctrl+I" = { move-column-right = [ ]; };
+          "Mod+Ctrl+H" = { consume-or-expel-window-left = [ ]; };
+          "Mod+Ctrl+L" = { consume-or-expel-window-right = [ ]; };
+
           "Mod+H" = { focus-column-left = [ ]; };
           "Mod+L" = { focus-column-right = [ ]; };
           "Mod+Shift+H" = { move-column-left = [ ]; };
-          "Mod+Shift+K" = { move-window-up = [ ]; };
-          "Mod+Ctrl+H" = { consume-or-expel-window-left = [ ]; };
-          "Mod+Ctrl+L" = { consume-or-expel-window-right = [ ]; };
-          "Mod+C" = { center-column = [ ]; };
-          "Mod+J" = { focus-window-down = [ ]; };
-          "Mod+K" = { focus-window-up = [ ]; };
-          "Mod+Shift+J" = { move-window-down = [ ]; };
           "Mod+Shift+L" = { move-column-right = [ ]; };
+          "Mod+Shift+J" = { move-column-to-workspace-down = [ ]; };
+          "Mod+Shift+K" = { move-column-to-workspace-up = [ ]; };
 
-          "Mod+U" = { focus-workspace-down = [ ]; };
-          "Mod+I" = { focus-workspace-up = [ ]; };
-          "Mod+Shift+U" = { move-column-to-workspace-down = [ ]; };
-          "Mod+Shift+I" = { move-column-to-workspace-up = [ ]; };
-          "Mod+Ctrl+U" = { move-workspace-down = [ ]; };
-          "Mod+Ctrl+I" = { move-workspace-up = [ ]; };
-          "Mod+7" = { focus-monitor-left = [ ]; };
-          "Mod+8" = { focus-monitor-down = [ ]; };
-          "Mod+9" = { focus-monitor-up = [ ]; };
-          "Mod+0" = { focus-monitor-right = [ ]; };
-          "Mod+Shift+7" = { move-column-to-monitor-left = [ ]; };
-          "Mod+Shift+8" = { move-column-to-monitor-down = [ ]; };
-          "Mod+Shift+9" = { move-column-to-monitor-up = [ ]; };
-          "Mod+Shift+0" = { move-column-to-monitor-right = [ ]; };
-  
+          "Mod+J" = { focus-workspace-down = [ ]; };
+          "Mod+K" = { focus-workspace-up = [ ]; };
+          "Mod+Ctrl+J" = { move-workspace-down = [ ]; };
+          "Mod+Ctrl+K" = { move-workspace-up = [ ]; };
+
+          "Mod+C" = { center-column = [ ]; };
           "Mod+R" = { switch-preset-column-width = [ ]; };
           "Mod+Shift+R" = { reset-window-height = [ ]; };
           "Mod+F" = { maximize-column = [ ]; };
