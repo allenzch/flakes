@@ -1,4 +1,4 @@
-{ lib, inputs }: rec {
+{ lib, inputs, rebmit, ... }: rec {
   haumea = inputs.haumea.lib;
 
   rakeLeaves =
@@ -58,7 +58,5 @@
       (getItemNames path keep)
   );
 
-  network = import ./network { inherit lib; };
-
-  misc = import ./misc { inherit lib; };
+  inherit (rebmit.lib) network misc;
 }

@@ -1,9 +1,9 @@
-{ config, lib, pkgs, ... }:
+{ ... }:
 {
   programs.yazi = {
     enable = true;
     settings = {
-      manager = {
+      mgr = {
         ratio = [ 1 4 3 ];
         sort_by = "natural";
         sort_sensitive = false;
@@ -20,6 +20,36 @@
       };
       open.prepend_rules = [
         { mime = "text/texmacs"; use = [ "open" "edit" ]; }
+      ];
+    };
+    keymap = {
+      mgr.prepend_keymap = [
+        {
+          on = [ "J" ];
+          run = "arrow 5";
+        }
+        {
+          on = [ "K" ];
+          run = "arrow -5";
+        }
+        {
+          on = [ "<C-j>" ];
+          run = "seek 5";
+        }
+        {
+          on = [ "<C-k>" ];
+          run = "seek -5";
+        }
+      ];
+      input.prepend_keymap = [
+        {
+          on = [ "H" ];
+          run = "move -5";
+        }
+        {
+          on = [ "L" ];
+          run = "move 5";
+        }
       ];
     };
   };

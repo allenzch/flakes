@@ -6,6 +6,7 @@
     inherit (inputs.nixpkgs.lib) mergeAttrsList nixosSystem singleton;
     mylib = import ./lib {
       inherit inputs;
+      inherit (inputs) rebmit;
       inherit (inputs.nixpkgs) lib;
     };
     data = import ./data.nix;
@@ -29,7 +30,6 @@
         ]) ++ nixosModules ++
         singleton {
           nixpkgs.overlays = [
-            inputs.enthalpy.overlays.default
             (final: prev: {
               rebmit = inputs.rebmit.overlays.default final prev;
             })
@@ -76,7 +76,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     impermanence.url = "github:nix-community/impermanence";
-    enthalpy.url = "https://git.rebmit.moe/rebmit/enthalpy/archive/master.tar.gz";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

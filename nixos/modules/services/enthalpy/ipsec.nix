@@ -136,7 +136,7 @@ in
       {
         path = with pkgs; [
           iproute2
-          ranet
+          rebmit.ranet
         ];
         script = "${command} up";
         reload = "${command} up";
