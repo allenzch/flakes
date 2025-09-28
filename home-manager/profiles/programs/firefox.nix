@@ -1,4 +1,4 @@
-{ ... }: 
+{ pkgs, ... }:
 {
   programs.firefox = {
     enable = true;
@@ -26,6 +26,10 @@
         "dom.webnotifications.serviceworker.enabled" = false;
         "dom.pushconnection.enabled" = false;
         "dom.push.enabled" = false;
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        "svg.context-properties.content.enabled" = true;
+        "browser.theme.dark-private-windows" = false;
+        "widget.gtk.rouned-bottom-corners.enabled" = true;
       };
       ExtensionSettings = {
         "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
@@ -40,12 +44,29 @@
           installation_mode = "force_installed";
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
         };
-        "@testpilot-containers" = {
+        "zotero@chnm.gmu.edu" = {
           installation_mode = "force_installed";
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/multi-account-containers/latest.xpi";
+          install_url = "https://www.zotero.org/download/connector/dl?browser=firefox";
+        };
+        "{3c078156-979c-498b-8990-85f7987dd929}" = {
+          installation_mode = "force_installed";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/sidebery/latest.xpi";
         };
       };
     };
+    profiles.default = {
+      userChrome = ''
+        @import "${pkgs.rebmit.firefox-gnome-theme}/lib/firefox-gnome-theme/userChrome.css";
+
+        #TabsToolbar {
+          display: none;
+        }
+      '';
+      userContent = ''
+        @import "${pkgs.rebmit.firefox-gnome-theme}/lib/firefox-gnome-theme/userContent.css"
+      '';
+    };
   };
+
   persistence.directories = [ ".mozilla/firefox" ];
 }

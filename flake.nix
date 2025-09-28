@@ -89,7 +89,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rebmit = {
-      url = "https://git.rebmit.moe/rebmit/nix-exprs/archive/master.tar.gz";
+      url = "github:rebmit/nix-exprs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
