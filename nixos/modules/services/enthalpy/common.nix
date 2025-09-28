@@ -53,8 +53,8 @@ in
 
       confext."resolv.conf" = {
         text = ''
-          nameserver 2620:119:35::35
-          nameserver 2620:119:53::53
+          nameserver 2620:fe::fe
+          nameserver 2620:fe::9
           nameserver 2606:4700:4700::1111
           nameserver 2606:4700:4700::1001
         '';
