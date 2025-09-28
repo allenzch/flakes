@@ -15,7 +15,7 @@
     ]) ++
     (with homeProfiles; [
       desktop-environments.niri-default
-      misc.theme-catppuccin
+      themes.adwaiccin
       misc.font-noto
     ]);
 
