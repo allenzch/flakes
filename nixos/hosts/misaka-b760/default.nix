@@ -8,10 +8,6 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICNDUqt2SdN4i2lt5HiAOfIDxZSCgRcatL5OdXaEM2Xk"
   ];
 
-  networking.hosts = {
-    "2404:6800:4003:c06::be" = [ "scholar.google.com" ];
-  };
-
   networking.netns.enthalpy.forwardPorts = [
     {
       protocol = "tcp";
