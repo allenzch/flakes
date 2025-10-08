@@ -48,7 +48,6 @@
         size = 36;
       };
       vimTheme = "catppuccin-latte";
-      helixTheme = "catppuccin_latte";
     };
 
     dark = {
@@ -97,7 +96,6 @@
         size = 36;
       };
       vimTheme = "catppuccin-frappe";
-      helixTheme = "catppuccin_frappe";
     };
   };
 }
