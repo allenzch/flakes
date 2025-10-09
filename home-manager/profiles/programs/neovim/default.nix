@@ -24,6 +24,7 @@ in {
       bufferline-nvim
       telescope-nvim
       transparent-nvim
+      csvview-nvim
     ];
 
     extraPackages = with pkgs; [
