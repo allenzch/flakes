@@ -16,7 +16,7 @@
     (with homeProfiles; [
       desktop-environments.niri-default
       themes.adwaiccin
-      misc.font-noto
+      fontconfig.noto
     ]);
 
   home.packages = with pkgs; [

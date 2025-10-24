@@ -26,7 +26,6 @@
 
   custom = {
     misc = {
-      fontconfig.enable = true;
       gtk.enable = true;
     };
     services = {

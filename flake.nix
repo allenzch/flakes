@@ -32,6 +32,9 @@
           nixpkgs.overlays = [
             (final: prev: {
               rebmit = inputs.rebmit.overlays.default final prev;
+              fuzzel = prev.fuzzel.override {
+                svgBackend = "librsvg";
+              };
             })
             (import ./pkgs/overlay.nix)
           ];
