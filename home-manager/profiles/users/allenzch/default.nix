@@ -2,6 +2,7 @@
   imports =
     (with homeProfiles.programs; [
       direnv
+      fcitx5
       fish
       yazi
       htop
@@ -36,17 +37,6 @@
         format = "ssh";
       };
       init.defaultBranch = "master";
-    };
-  };
-
-  custom = {
-    i18n.fcitx5 = {
-      enable = true;
-      plasma6Support = true;
-      withConfigtool = true;
-      addons = with pkgs; [
-        qt6Packages.fcitx5-chinese-addons
-      ];
     };
   };
 
