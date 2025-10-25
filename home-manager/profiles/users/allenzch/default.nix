@@ -4,20 +4,20 @@
       direnv
       fcitx5
       fish
-      yazi
       htop
-      neovim
       logseq
-      vscode
+      neovim
+      syncthing
       telegram
       texmacs
-      syncthing
+      vscodium
+      yazi
       zotero
     ]) ++
     (with homeProfiles; [
-      desktop-environments.niri-default
-      themes.adwaiccin
-      fontconfig.noto
+      graphical.niri
+      theme.adwaiccin
+      font.noto
     ]);
 
   home.packages = with pkgs; [

@@ -1,4 +1,4 @@
-{ config, pkgs, mylib, inputs, data, homeModules, homeProfiles, ... }:
+{ config, pkgs, inputs, homeModules, homeProfiles, ... }:
 let
   name = "allenzch";
   uid = 1000;
