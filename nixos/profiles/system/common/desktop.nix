@@ -1,4 +1,7 @@
-{ config, nixosProfiles, ... }:
+{ config, lib, pkgs, nixosProfiles, ... }:
+let
+  inherit (lib) singleton;
+in
 {
   imports = with nixosProfiles; [
     system.common.bare
@@ -27,6 +30,11 @@
 
   networking.hosts = {
     "2404:6800:4003:c06::be" = [ "scholar.google.com" ];
+  };
+
+  system.replaceDependencies.replacements = singleton {
+    oldDependency = pkgs.xkeyboard_config;
+    newDependency = pkgs.xkeyboard_config-mod;
   };
 
   systemd.network = {
