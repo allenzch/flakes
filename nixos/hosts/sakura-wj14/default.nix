@@ -40,7 +40,7 @@
     ipsec.interfaces = [ "wlan0" ];
     clat = {
       enable = true;
-      segment = [ "2a0e:aa07:e21c:2546::3" ];
+      segment = [ "2a0e:aa07:e21c:5866::3" ];
     };
   };
 
