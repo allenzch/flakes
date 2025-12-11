@@ -11,7 +11,7 @@
       ];
       auto-allocate-uids = true;
       use-cgroups = true;
-      flake-registry = "";
+      flake-registry = "/etc/nix/registry.json";
     };
     registry.p.to = {
       type = "path";
