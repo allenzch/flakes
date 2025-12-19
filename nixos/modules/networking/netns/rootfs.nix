@@ -237,7 +237,7 @@ in
   };
 
   config = {
-    system.extraSystemBuilderCmds = ''
+    system.systemBuilderCommands = ''
       ${concatStringsSep "\n" (
         mapAttrsToList (
           name: cfg:

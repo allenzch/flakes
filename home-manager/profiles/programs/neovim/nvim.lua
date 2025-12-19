@@ -62,17 +62,11 @@ vim.api.nvim_set_keymap('', '<tab>', ':bnext<CR>', { noremap = true })
 -- plugins
 --
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local lspconfig = require('lspconfig')
-local servers = { 'nixd', 'clangd', 'pyright', 'rust_analyzer', 'fortls' }
-
-for _, lsp in pairs(servers) do
-  lspconfig[lsp].setup {
-    capabilities = capabilities,
-    settings = {
-    },
-  }
-end
+vim.lsp.enable('nixd')
+vim.lsp.enable('clangd')
+vim.lsp.enable('rust_analyzer')
+vim.lsp.enable('pyright')
+vim.lsp.enable('fortls')
 
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
@@ -146,10 +140,7 @@ cmp.setup {
   },
 }
 
-require('which-key').setup {
-}
-
-require('leap').add_default_mappings()
+require('which-key').setup {}
 
 require('nvim-autopairs').setup()
 
@@ -223,5 +214,15 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "csv",
   callback = function()
     vim.cmd("CsvViewEnable")
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "rust", "python" },
+  callback = function()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.softtabstop = 2
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.expandtab = true
   end,
 })

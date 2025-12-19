@@ -28,15 +28,17 @@
 
   programs.git = {
     enable = true;
-    userName = data.git.userName;
-    userEmail = data.git.userEmail;
-    signing.key = "~/.ssh/id_ed25519";
-    extraConfig = {
-      commit.gpgSign = true;
-      gpg = {
-        format = "ssh";
+    settings = {
+      user = {
+        name = data.git.userName;
+        email = data.git.userEmail;
       };
+      commit.gpgSign = true;
       init.defaultBranch = "master";
+    };
+    signing = {
+      format = "ssh";
+      key = "~/.ssh/id_ed25519";
     };
   };
 
