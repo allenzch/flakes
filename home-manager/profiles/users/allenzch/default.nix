@@ -22,6 +22,7 @@
 
   home.packages = with pkgs; [
     apostrophe
+    comma-with-db
   ];
 
   programs.bash.enable = true;

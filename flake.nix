@@ -36,6 +36,7 @@
                 svgBackend = "librsvg";
               };
             })
+            inputs.nix-index-database.overlays.nix-index
             (import ./pkgs/overlay.nix)
           ];
           networking.hostName = "${name}";
@@ -89,6 +90,10 @@
     };
     niri-flake = {
       url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rebmit = {
