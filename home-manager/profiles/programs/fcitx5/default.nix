@@ -14,18 +14,5 @@ in
     home.packages = singleton fcitx5Package;
 
     persistence.directories = singleton  ".config/fcitx5";
-
-    systemd.user.services.fcitx5-daemon = {
-      Unit = {
-        Description = "Fcitx5 input method editor";
-        PartOf = [ "graphical-session.target" ];
-        After = [ "graphical-session.target" ];
-        Requiste = [ "graphical-session.target" ];
-      };
-      Service.ExecStart = "${fcitx5Package}/bin/fcitx5";
-      Install.WantedBy = [ "graphical-session.target" ];
-    };
-
-    i18n.inputMethod.enabled = null;
   };
 }
