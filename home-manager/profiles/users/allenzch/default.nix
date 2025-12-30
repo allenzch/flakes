@@ -9,8 +9,6 @@
       neovim
       syncthing
       telegram
-      texmacs
-      vscodium
       yazi
       zotero
     ]) ++
