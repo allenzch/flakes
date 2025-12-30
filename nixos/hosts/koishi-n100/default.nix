@@ -7,6 +7,7 @@
     (with nixosProfiles; [
       users.root
       services.openssh
+      services.godns
     ])
   );
 
@@ -33,4 +34,19 @@
       target = "[::]:22";
     }
   ];
+
+  services.godns-multi = {
+    ipv6.settings = {
+      domains = [
+        {
+          domain_name = "allenzch.me";
+          sub_domains = [ "koishi-n100.dyn" ];
+        }
+      ];
+      ip_type = "IPv6";
+      ipv6_urls = [
+        "https://ipv6.icanhazip.com"
+      ];
+    };
+  };
 }
