@@ -43,6 +43,7 @@
         package = pkgs.capitaine-cursors;
         size = 36;
       };
+      kittyTheme = "${inputs.tinted-terminal}/themes/kitty/base16-catppuccin-latte.conf";
       vimTheme = "catppuccin-latte";
     };
 
@@ -87,6 +88,7 @@
         package = pkgs.capitaine-cursors;
         size = 36;
       };
+      kittyTheme = "${inputs.tinted-terminal}/themes/kitty/base16-catppuccin-frappe.conf";
       vimTheme = "catppuccin-frappe";
     };
   };

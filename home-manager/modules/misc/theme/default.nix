@@ -9,6 +9,7 @@ let
       gtkTheme = mkOption { };
       base24Theme = mkOption { };
       cursorTheme = mkOption { };
+      kittyTheme = mkOption { };
       vimTheme = mkOption { };
     };
   };

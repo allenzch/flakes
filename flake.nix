@@ -84,6 +84,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    tinted-terminal = {
+      url = "github:tinted-theming/tinted-terminal";
+      flake = false;
+    };
     wallpapers = {
       url = "git+ssh://git@github.com/allenzch/wallpapers.git?shallow=1";
       flake = false;

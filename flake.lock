@@ -334,6 +334,7 @@
         "nixpkgs": "nixpkgs",
         "rebmit": "rebmit",
         "sops-nix": "sops-nix",
+        "tinted-terminal": "tinted-terminal",
         "wallpapers": "wallpapers"
       }
     },
@@ -354,6 +355,22 @@
       "original": {
         "owner": "Mic92",
         "repo": "sops-nix",
+        "type": "github"
+      }
+    },
+    "tinted-terminal": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1765674313,
+        "narHash": "sha256-5QzcUgx1vft6SCcqt4wUgAoSVH/ytAHv2BceHqSVU6o=",
+        "owner": "tinted-theming",
+        "repo": "tinted-terminal",
+        "rev": "d34c828c037ebaa7e871994376ed049f39075686",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tinted-theming",
+        "repo": "tinted-terminal",
         "type": "github"
       }
     },
