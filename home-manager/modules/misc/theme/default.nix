@@ -1,7 +1,7 @@
 { pkgs, config, lib, ... }:
 with lib;
 let
-  cfg = config.custom.misc.theme;
+  cfg = config.misc.theme;
   themeOpts = {
     options = {
       wallpaper = mkOption { };
@@ -14,7 +14,7 @@ let
   };
 in
 {
-  options.custom.misc.theme = {
+  options.misc.theme = {
     enable = mkEnableOption "theme configuration";
     inUse = mkOption {
       type = types.submodule themeOpts;
@@ -38,7 +38,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    custom.misc.theme = {
+    misc.theme = {
       inUse = cfg.dark;
       variant = "dark";
     };
@@ -61,7 +61,7 @@ in
     '';
 
     specialisation.light-theme.configuration = {
-      custom.misc.theme = {
+      misc.theme = {
         inUse = mkForce cfg.light;
         variant = mkForce "light";
       };

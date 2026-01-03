@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  theme = config.custom.misc.theme;
+  theme = config.misc.theme;
 in {
   programs.fuzzel = {
     enable = true;

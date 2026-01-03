@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }:
 with lib;
 let
-  cfg = config.custom.services.niri;
-  theme = config.custom.misc.theme;
+  cfg = config.services.niri;
+  theme = config.misc.theme;
   configFile = pkgs.writeTextFile {
     name = "niri-config.kdl";
     text = (lib.hm.generators.toKDL { } cfg.config) + "\n" + cfg.extraConfig;
@@ -12,7 +12,7 @@ let
   };
 in
 {
-  options.custom.services.niri = {
+  options.services.niri = {
     enable = mkEnableOption "niri configuration";
     package = mkPackageOption pkgs "niri" { };
     checkConfig = mkOption {
@@ -44,11 +44,11 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     {
-      custom.services.niri.extraConfig = ''
+      services.niri.extraConfig = ''
         spawn-at-startup "bash" "-c" "systemctl --user import-environment PATH && systemctl --user restart xdg-desktop-portal.service"
       '';
   
-      custom.services.niri.config = {
+      services.niri.config = {
         input = {
           touchpad = {
             tap = [ ];
@@ -145,7 +145,7 @@ in
       };
     }
     (mkIf theme.enable {
-      custom.services.niri.extraConfig = ''
+      services.niri.extraConfig = ''
         cursor {
           xcursor-theme "${theme.inUse.cursorTheme.name}"
           xcursor-size ${toString theme.inUse.cursorTheme.size}

@@ -1,8 +1,8 @@
 { config, lib, ... }:
 with lib;
 let
-  cfg = config.custom.misc.gtk;
-  theme = config.custom.misc.theme;
+  cfg = config.misc.gtk;
+  theme = config.misc.theme;
 
   cfg2 = cfg.gtk2;
   cfg3 = cfg.gtk3;
@@ -90,7 +90,7 @@ let
   };
 in
 {
-  options.custom.misc.gtk = {
+  options.misc.gtk = {
     enable = mkEnableOption "gtk configuration";
     font = mkOption {
       type = types.nullOr hm.types.fontType;
@@ -245,7 +245,7 @@ in
         dconf.settings."org/gnome/desktop/interface" = dconfIni;
       }
       (mkIf theme.enable {
-        custom.misc.gtk = {
+        misc.gtk = {
           iconTheme = theme.inUse.iconTheme;
           theme = theme.inUse.gtkTheme;
           cursorTheme = theme.inUse.cursorTheme;

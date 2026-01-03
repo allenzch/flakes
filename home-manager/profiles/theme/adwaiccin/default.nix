@@ -1,5 +1,5 @@
 { pkgs, inputs, ... }: {
-  custom.misc.theme = {
+  misc.theme = {
     enable = true;
 
     light = {

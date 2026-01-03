@@ -1,6 +1,6 @@
 { pkgs, config, lib, ... }:
 with lib; let
-  theme = config.custom.misc.theme;
+  theme = config.misc.theme;
 in {
   programs.neovim = mkMerge [{
     enable = true;

@@ -1,7 +1,7 @@
 { config, pkgs, lib, wallpapers, ... }:
 with lib;
 let
-  theme = config.custom.misc.theme;
+  theme = config.misc.theme;
 in
 {
   options.services.swww = {
