@@ -2,18 +2,18 @@
   imports =
     (with homeProfiles.programs; [
       direnv
-      fcitx5
       fish
       htop
-      logseq
       neovim
       syncthing
-      telegram
       yazi
+
+      niri
+      logseq
+      telegram
       zotero
     ]) ++
     (with homeProfiles; [
-      graphical.niri
       theme.adwaiccin
       font.noto
     ]);

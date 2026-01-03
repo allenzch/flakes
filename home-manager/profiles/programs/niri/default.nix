@@ -1,0 +1,64 @@
+{ config, pkgs, inputs, ... }:
+let
+  inherit (config.misc.theme.inUse) base24Theme cursorTheme;
+  cfg = config.programs.niri;
+in
+{
+  imports = [
+    inputs.niri-flake.homeModules.niri
+    ./binds.nix
+    ./portal.nix
+    ./programs.nix
+  ];
+
+  programs.niri.package = pkgs.niri;
+
+  programs.niri.settings = {
+    input.touchpad = {
+      tap = true;
+      natural-scroll = true;
+      dwt = true;
+    };
+    hotkey-overlay.skip-at-startup = true;
+    prefer-no-csd = true;
+    window-rules = [{
+      geometry-corner-radius = 
+      let
+        radius = 0.0;
+      in {
+        bottom-left = radius;
+        bottom-right = radius;
+        top-left = radius;
+        top-right = radius;
+      };
+      clip-to-geometry = true;
+      draw-border-with-background = false;
+    }];
+    layout = {
+      gaps = 16;
+      focus-ring = {
+        active.color = "${base24Theme.base0D}";
+        inactive.color = "${base24Theme.base05}";
+      };
+      default-column-width = { proportion = 1.0 / 2.0; };
+    };
+    cursor = {
+      theme = cursorTheme.name;
+      size = cursorTheme.size;
+    };
+    spawn-at-startup = [
+      { argv = [ "bash" "-c" "systemctl --user import-environment PATH && systemctl --user restart xdg-desktop-portal.service" ]; }
+    ];
+  };
+
+  home.packages = with pkgs; [
+    cfg.package
+    (writeShellApplication {
+      name = "wayland-session";
+      runtimeInputs = [ cfg.package ];
+      text = ''
+        niri-session
+      '';
+    })
+  ];
+}
