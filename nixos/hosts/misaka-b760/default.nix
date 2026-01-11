@@ -16,4 +16,8 @@
       target = "[::]:22";
     }
   ];
+
+  home-manager.users.allenzch.programs.niri = {
+    settings.outputs.DP-1.scale = 1.4;
+  };
 }
