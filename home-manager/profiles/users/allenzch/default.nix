@@ -7,6 +7,7 @@
       neovim
       syncthing
       yazi
+      zoxide
 
       niri
       logseq
