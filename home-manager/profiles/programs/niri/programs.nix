@@ -9,10 +9,7 @@
   ];
 
   imports = with homeProfiles.programs; [
-    swww
-    waybar
-    fuzzel
-    swaylock
+    noctalia-shell
     kitty
     firefox
     fcitx5

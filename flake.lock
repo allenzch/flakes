@@ -338,6 +338,26 @@
         "type": "github"
       }
     },
+    "noctalia-shell": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1768120849,
+        "narHash": "sha256-0tTTaCGB4yPzSPK4HLCTuaWfdN1ALlZr2rCvXLdeWaQ=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "rev": "e38881b1f78d8a58b76b107a51a423b9de69d047",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "type": "github"
+      }
+    },
     "rebmit": {
       "inputs": {
         "devshell": "devshell",
@@ -373,6 +393,7 @@
         "niri-flake": "niri-flake",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_2",
+        "noctalia-shell": "noctalia-shell",
         "rebmit": "rebmit",
         "sops-nix": "sops-nix",
         "tinted-terminal": "tinted-terminal",

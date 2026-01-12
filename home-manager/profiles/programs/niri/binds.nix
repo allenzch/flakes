@@ -1,4 +1,11 @@
 { pkgs, ... }:
+let
+  noctaliaIpc = cmd: [
+    "noctalia-shell"
+    "ipc"
+    "call"
+  ] ++ cmd;
+in
 {
   programs.niri.settings.binds = {
     "Mod+H".action.focus-column-left = [];
@@ -32,10 +39,11 @@
     "Mod+BracketLeft".action.spawn = [ "${pkgs.playerctl}/bin/playerctl" "previous" ];
     "Mod+BracketRight".action.spawn = [ "${pkgs.playerctl}/bin/playerctl" "next" ];
 
+    "Mod+D".action.spawn = noctaliaIpc [ "launcher" "toggle" ];
+    "Mod+M".action.spawn = noctaliaIpc [ "lockScreen" "lock" ];
+    "Mod+V".action.spawn = noctaliaIpc [ "launcher" "clipboard" ];
     "Mod+Return".action.spawn = "kitty";
     "Mod+T".action.spawn = "kitty";
-    "Mod+D".action.spawn = "fuzzel";
-    "Mod+M".action.spawn = "swaylock";
     "Mod+E".action.spawn = "nautilus";
     "Mod+W".action.spawn = "firefox";
 

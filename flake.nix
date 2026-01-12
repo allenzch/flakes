@@ -37,6 +37,7 @@
               };
             })
             inputs.nix-index-database.overlays.nix-index
+            inputs.noctalia-shell.overlays.default
             (import ./pkgs/overlay.nix)
           ];
           networking.hostName = "${name}";
@@ -98,6 +99,10 @@
     };
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    noctalia-shell = {
+      url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rebmit = {
