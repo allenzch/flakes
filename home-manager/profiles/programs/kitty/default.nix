@@ -1,7 +1,5 @@
 { config, ... }:
-let
-  theme = config.misc.theme;
-in {
+{
   programs.kitty = {
     enable = true;
     font = {
@@ -26,7 +24,7 @@ in {
       "ctrl+tab" = "launch";
     };
     extraConfig = ''
-      include ${theme.inUse.kittyTheme}
+      include ${config.home.homeDirectory}/.config/kitty/themes/noctalia.conf
     '';
   };
 }

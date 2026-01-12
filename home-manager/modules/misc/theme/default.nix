@@ -4,12 +4,10 @@ let
   cfg = config.misc.theme;
   themeOpts = {
     options = {
-      wallpaper = mkOption { };
       iconTheme = mkOption { };
       gtkTheme = mkOption { };
       base24Theme = mkOption { };
       cursorTheme = mkOption { };
-      kittyTheme = mkOption { };
       vimTheme = mkOption { };
     };
   };

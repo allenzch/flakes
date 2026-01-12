@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, ... }: {
   misc.theme = {
     enable = true;
 
@@ -37,13 +37,11 @@
         base16 = "209fb5";
         base17 = "ea76cb";
       };
-      wallpaper = "${inputs.wallpapers}/wallhaven-6d312w.jpg";
       cursorTheme = {
         name = "capitaine-cursors-white";
         package = pkgs.capitaine-cursors;
         size = 36;
       };
-      kittyTheme = "${inputs.tinted-terminal}/themes/kitty/base16-catppuccin-latte.conf";
       vimTheme = "catppuccin-latte";
     };
 
@@ -82,13 +80,11 @@
         base16 = "85c1dc";
         base17 = "f4b8e4";
       };
-      wallpaper = "${inputs.wallpapers}/wallhaven-d6jzvg.jpg";
       cursorTheme = {
         name = "capitaine-cursors";
         package = pkgs.capitaine-cursors;
         size = 36;
       };
-      kittyTheme = "${inputs.tinted-terminal}/themes/kitty/base16-catppuccin-frappe.conf";
       vimTheme = "catppuccin-frappe";
     };
   };
