@@ -1,8 +1,6 @@
-{ pkgs, config, lib, ... }:
-with lib; let
-  theme = config.misc.theme;
-in {
-  programs.neovim = mkMerge [{
+{ pkgs, ... }:
+{
+  programs.neovim = {
     enable = true;
     defaultEditor = true;
     vimAlias = true;
@@ -25,6 +23,7 @@ in {
       telescope-nvim
       transparent-nvim
       csvview-nvim
+      base16-nvim
     ];
 
     extraPackages = with pkgs; [
@@ -40,10 +39,5 @@ in {
     extraConfig = ''
       :source ${./nvim.lua}
     '';
-  }
-  (mkIf theme.enable {
-    extraConfig = ''
-      :colorscheme ${theme.inUse.vimTheme}
-    '';
-  })];
+  };
 }
