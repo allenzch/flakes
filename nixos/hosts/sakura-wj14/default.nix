@@ -19,6 +19,10 @@
 
   hardware.cpu.amd.updateMicrocode = true;
 
+  home-manager.users.allenzch.programs.niri = {
+    settings.outputs.eDP-1.scale = 1.8;
+  };
+
   services.udev.extraHwdb = ''
     evdev:atkbd:dmi:*
       KEYBOARD_KEY_3a=esc
