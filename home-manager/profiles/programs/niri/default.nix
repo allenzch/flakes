@@ -11,7 +11,7 @@ in
     ./programs.nix
   ];
 
-  programs.niri.package = pkgs.niri;
+  programs.niri.package = pkgs.niri-unstable;
 
   programs.niri.settings = {
     input.touchpad = {
@@ -36,10 +36,6 @@ in
     }];
     layout = {
       gaps = 16;
-      focus-ring = {
-        active.color = "${base24Theme.base0D}";
-        inactive.color = "${base24Theme.base05}";
-      };
       default-column-width = { proportion = 1.0 / 2.0; };
     };
     cursor = {
@@ -49,6 +45,7 @@ in
     spawn-at-startup = [
       { argv = [ "bash" "-c" "systemctl --user import-environment PATH && systemctl --user restart xdg-desktop-portal.service" ]; }
     ];
+    includes = [ "${config.home.homeDirectory}/.config/niri/noctalia.kdl" ];
   };
 
   home.packages = with pkgs; [
