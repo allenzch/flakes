@@ -42,7 +42,6 @@
         package = pkgs.capitaine-cursors;
         size = 36;
       };
-      vimTheme = "catppuccin-latte";
     };
 
     dark = {
@@ -85,7 +84,6 @@
         package = pkgs.capitaine-cursors;
         size = 36;
       };
-      vimTheme = "catppuccin-frappe";
     };
   };
 }
