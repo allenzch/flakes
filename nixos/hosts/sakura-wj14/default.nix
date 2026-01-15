@@ -51,4 +51,5 @@
   powerManagement.powertop.enable = true;
   services.power-profiles-daemon.enable = true;
   services.logind.settings.Login.HandleLidSwitch = "ignore";
+  services.upower.enable = true;
 }
