@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
+let
+  inherit (config.misc.theme.inUse) vimTheme;
+in
 {
   programs.neovim = {
     enable = true;
@@ -38,6 +41,7 @@
 
     extraConfig = ''
       :source ${./nvim.lua}
+      :colorscheme ${vimTheme}
     '';
   };
 }

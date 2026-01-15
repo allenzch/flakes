@@ -1,6 +1,6 @@
 { config, pkgs, inputs, ... }:
 let
-  inherit (config.misc.theme.inUse) base24Theme cursorTheme;
+  inherit (config.misc.theme.inUse) cursorTheme;
   cfg = config.programs.niri;
 in
 {

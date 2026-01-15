@@ -1,4 +1,7 @@
 { config, ... }:
+let
+  inherit (config.misc.theme.inUse) kittyTheme;
+in
 {
   programs.kitty = {
     enable = true;
@@ -24,7 +27,7 @@
       "ctrl+tab" = "launch";
     };
     extraConfig = ''
-      include ${config.home.homeDirectory}/.config/kitty/themes/noctalia.conf
+      include ${kittyTheme}
     '';
   };
 }

@@ -6,8 +6,9 @@ let
     options = {
       iconTheme = mkOption { };
       gtkTheme = mkOption { };
-      base24Theme = mkOption { };
       cursorTheme = mkOption { };
+      kittyTheme = mkOption { };
+      vimTheme = mkOption { };
     };
   };
 in
