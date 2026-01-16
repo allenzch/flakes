@@ -28,6 +28,7 @@ in
     };
     extraConfig = ''
       include ${kittyTheme}
+      include ${config.home.homeDirectory}/.config/noctalia/user-templates/kitty/theme.conf
     '';
   };
 }

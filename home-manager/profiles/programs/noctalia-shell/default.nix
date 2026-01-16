@@ -19,7 +19,6 @@ in
       Restart = "on-failure";
       Environment = [
         "QT_QPA_PLATFORMTHEME=gtk3"
-        "NOCTALIA_SETTINGS_FALLBACK=%h/.config/noctalia/gui-settings.json"
         "NOCTALIA_REALNAME=${data.noctalia-shell.displayName}"
       ];
     };
