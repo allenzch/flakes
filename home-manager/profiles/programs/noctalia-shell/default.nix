@@ -5,6 +5,14 @@ in
 {
   home.packages = [ pkgs.noctalia-shell ];
 
+  xdg.configFile = {
+    "noctalia" = {
+      source = ./config;
+      recursive = true;
+      force = true;
+    };
+  };
+
   systemd.user.services.noctalia-shell = {
     Unit = {
       Description = "Noctalia Shell - Wayland desktop shell";
