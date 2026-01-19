@@ -20,7 +20,17 @@
   hardware.cpu.amd.updateMicrocode = true;
 
   home-manager.users.allenzch.programs.niri = {
-    settings.outputs.eDP-1.scale = 1.8;
+    settings.outputs = {
+      DP-1 = {
+        scale = 2;
+        mode = {
+          width = 3840;
+          height = 2160;
+          refresh = 160.0;
+        };
+      };
+      eDP-1.scale = 1.8;
+    };
   };
 
   services.udev.extraHwdb = ''
