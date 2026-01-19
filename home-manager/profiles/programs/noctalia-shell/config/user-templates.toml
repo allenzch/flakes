@@ -1,5 +1,5 @@
 [config]
 [templates.kitty]
-input_path = "~/.config/noctalia/user-templates/kitty/theme-template.conf"
-output_path = "~/.config/noctalia/user-templates/kitty/theme.conf"
+input_path = "~/.config/noctalia/templates/kitty/theme.conf"
+output_path = "~/.config/noctalia/generated/kitty/theme.conf"
 post_hook = "pkill -SIGUSR1 kitty"

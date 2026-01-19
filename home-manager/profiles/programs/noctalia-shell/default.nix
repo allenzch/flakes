@@ -36,5 +36,6 @@ in
 
   persistence.directories = [
     ".config/noctalia"
+    ".cache/noctalia"
   ];
 }
