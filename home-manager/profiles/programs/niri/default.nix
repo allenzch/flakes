@@ -2,7 +2,7 @@
 let
   inherit (lib.meta) getExe;
   cfg = config.programs.niri;
-  themeDir = "${config.theme.themesDir}/niri";
+  themeDir = "${config.home.homeDirectory}/${config.theme.themesDir}/niri";
 in
 {
   imports = [

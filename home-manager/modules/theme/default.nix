@@ -18,7 +18,7 @@ in
   options.theme = {
     themesDir = mkOption {
       type = str;
-      default = "${config.home.homeDirectory}/.config/themes";
+      default = ".config/themes";
     };
     light = mkOption {
       type = submodule themeOpts;

@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   inherit (lib.meta) getExe;
-  themeDir = "${config.theme.themesDir}/kitty";
+  themeDir = "${config.home.homeDirectory}/${config.theme.themesDir}/kitty";
 in
 {
   programs.kitty = {

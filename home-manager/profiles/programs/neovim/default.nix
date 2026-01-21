@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   inherit (config.theme) light dark;
-  themeStatePath = "${config.theme.themesDir}/nvim/state";
+  themeStatePath = "${config.home.homeDirectory}/${config.theme.themesDir}/nvim/state";
   vimThemeCfg = pkgs.writeText "vimThemeCfg.lua" ''
     local flag = vim.fn.readfile("${themeStatePath}")[1]
     vim.cmd.colorscheme(flag == "light" and "${light.vimTheme}" or "${dark.vimTheme}")
