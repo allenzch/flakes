@@ -9,13 +9,14 @@
   ];
 
   imports = with homeProfiles.programs; [
+    darkman
     noctalia-shell
     kitty
     firefox
     fcitx5
+    gtk
   ];
 
-  misc.gtk.enable = true;
 
   home.sessionVariables.NIXOS_OZONE_WL = 1;
 }
