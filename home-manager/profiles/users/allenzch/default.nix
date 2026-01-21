@@ -10,6 +10,7 @@
       zoxide
 
       niri
+      libreoffice
       logseq
       telegram
       zotero
