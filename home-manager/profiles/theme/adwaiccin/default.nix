@@ -1,41 +1,31 @@
 { pkgs, inputs, ... }: {
-  misc.theme = {
-    enable = true;
-
+  theme = {
     light = {
-      iconTheme = {
-        name = "Papirus-Light";
-        package = pkgs.papirus-icon-theme;
-      };
-      gtkTheme = {
-        name = "adw-gtk3";
-        package = pkgs.adw-gtk3;
-      };
-      cursorTheme = {
-        name = "capitaine-cursors-white";
-        package = pkgs.capitaine-cursors;
-        size = 36;
-      };
+      iconTheme = "Papirus-Dark";
+      gtkTheme = "adw-gtk3";
+      cursorTheme = "capitaine-cursors";
+      cursorSize = "36";
       kittyTheme = "${inputs.tinted-terminal}/themes/kitty/base16-catppuccin-latte.conf";
       vimTheme = "catppuccin-latte";
     };
 
     dark = {
-      iconTheme = {
-        name = "Papirus-Dark";
-        package = pkgs.papirus-icon-theme;
-      };
-      gtkTheme = {
-        name = "adw-gtk3";
-        package = pkgs.adw-gtk3;
-      };
-      cursorTheme = {
-        name = "capitaine-cursors";
-        package = pkgs.capitaine-cursors;
-        size = 36;
-      };
+      iconTheme = "Papirus-Dark";
+      gtkTheme = "adw-gtk3";
+      cursorTheme = "capitaine-cursors";
+      cursorSize = "36";
       kittyTheme = "${inputs.tinted-terminal}/themes/kitty/base16-catppuccin-mocha.conf";
       vimTheme = "catppuccin-mocha";
     };
   };
+
+  home.packages = with pkgs; [
+    adw-gtk3
+    capitaine-cursors
+    papirus-icon-theme
+  ];
+
+  programs.neovim.plugins = with pkgs.vimPlugins; [
+    catppuccin-nvim
+  ];
 }

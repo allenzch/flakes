@@ -8,15 +8,18 @@
     mpv
   ];
 
-  imports = with homeProfiles.programs; [
-    darkman
-    noctalia-shell
+  imports = (with homeProfiles.programs; [
     kitty
     firefox
-    fcitx5
-    gtk
-  ];
 
+    darkman
+    gtk
+    fcitx5
+    noctalia-shell
+  ]) ++ (with homeProfiles; [
+    theme.adwaiccin
+    font.noto
+  ]);
 
   home.sessionVariables.NIXOS_OZONE_WL = 1;
 }

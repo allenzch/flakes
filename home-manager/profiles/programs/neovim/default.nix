@@ -1,6 +1,17 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
-  inherit (config.misc.theme.inUse) vimTheme;
+  inherit (config.theme) light dark;
+  themeStatePath = "${config.theme.themesDir}/nvim/state";
+  vimThemeCfg = pkgs.writeText "vimThemeCfg.lua" ''
+    local flag = vim.fn.readfile("${themeStatePath}")[1]
+    vim.cmd.colorscheme(flag == "light" and "${light.vimTheme}" or "${dark.vimTheme}")
+    vim.uv.new_fs_event():start("${themeStatePath}", {}, function()
+      vim.schedule(function()
+        local flag = vim.fn.readfile("${themeStatePath}")[1]
+        vim.cmd.colorscheme(flag == "light" and "${light.vimTheme}" or "${dark.vimTheme}")
+      end)
+    end)
+  '';
 in
 {
   programs.neovim = {
@@ -13,7 +24,6 @@ in
       nvim-lspconfig
       nvim-cmp
       cmp-nvim-lsp
-      catppuccin-nvim
       luasnip
       which-key-nvim
       leap-nvim
@@ -40,8 +50,24 @@ in
     ];
 
     extraConfig = ''
-      :source ${./nvim.lua}
-      :colorscheme ${vimTheme}
+      :luafile ${./nvim.lua}
+      :luafile ${vimThemeCfg}
     '';
   };
+
+  services.darkman =
+    let
+      mkScript =
+        mode:
+        pkgs.writeShellApplication {
+          name = "darkman-switch-nvim-${mode}";
+          text = ''
+            echo ${mode} > ${themeStatePath}
+          '';
+        };
+    in
+    {
+      lightModeScripts.neovim = "${lib.getExe (mkScript "light")}";
+      darkModeScripts.neovim = "${lib.getExe (mkScript "dark")}";
+    };
 }

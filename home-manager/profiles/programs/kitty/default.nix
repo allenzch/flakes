@@ -1,6 +1,7 @@
-{ config, ... }:
+{ config, lib, pkgs, ... }:
 let
-  inherit (config.misc.theme.inUse) kittyTheme;
+  inherit (lib.meta) getExe;
+  themeDir = "${config.theme.themesDir}/kitty";
 in
 {
   programs.kitty = {
@@ -27,8 +28,24 @@ in
       "ctrl+tab" = "launch";
     };
     extraConfig = ''
-      include ${kittyTheme}
-      include ${config.home.homeDirectory}/.config/noctalia/generated/kitty/theme.conf
+      include ${themeDir}/theme.conf
+      include ${themeDir}/noctalia_theme.conf
     '';
+  };
+
+  services.darkman = let
+    mkScript = mode: pkgs.writeShellApplication {
+      name = "darkman-switch-kitty-${mode}";
+      runtimeInputs = with pkgs; [
+        procps
+      ];
+      text = ''
+        ln --force --symbolic --verbose ${config.theme.${mode}.kittyTheme} ${themeDir}/theme.conf
+        pkill -USR1 -u "$USER" kitty || true
+      '';
+    };
+  in {
+    lightModeScripts.kitty = "${getExe (mkScript "light")}";
+    darkModeScripts.kitty = "${getExe (mkScript "dark")}";
   };
 }

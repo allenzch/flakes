@@ -1,7 +1,8 @@
-{ config, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 let
-  inherit (config.misc.theme.inUse) cursorTheme;
+  inherit (lib.meta) getExe;
   cfg = config.programs.niri;
+  themeDir = "${config.theme.themesDir}/niri";
 in
 {
   imports = [
@@ -38,14 +39,13 @@ in
       gaps = 16;
       default-column-width = { proportion = 1.0 / 2.0; };
     };
-    cursor = {
-      theme = cursorTheme.name;
-      size = cursorTheme.size;
-    };
     spawn-at-startup = [
       { argv = [ "bash" "-c" "systemctl --user import-environment PATH && systemctl --user restart xdg-desktop-portal.service" ]; }
     ];
-    includes = [ "${config.home.homeDirectory}/.config/niri/noctalia.kdl" ];
+    includes = [
+      "${themeDir}/noctalia_theme.kdl"
+      "${themeDir}/cursor.kdl"
+    ];
   };
 
   home.packages = with pkgs; [
@@ -58,4 +58,23 @@ in
       '';
     })
   ];
+
+  services.darkman = let
+    mkScript = mode: let
+      cursorCfg = pkgs.writeText "cursor.kdl" ''
+        cursor {
+          xcursor-theme "${config.theme.${mode}.cursorTheme}"
+          xcursor-size ${config.theme.${mode}.cursorSize}
+        }
+      '';
+    in pkgs.writeShellApplication {
+      name = "darkman-switch-niri-cursor-${mode}";
+      text = ''
+        ln --force --symbolic --verbose ${cursorCfg} ${themeDir}/cursor.kdl
+      '';
+    };
+  in {
+    lightModeScripts.niri = "${getExe (mkScript "light")}";
+    darkModeScripts.niri = "${getExe (mkScript "dark")}";
+  };
 }
