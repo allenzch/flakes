@@ -43,7 +43,6 @@ in
       wl-clipboard
       clang-tools
       nixd
-      pyright
       fortls
       nixpkgs-fmt
       rust-analyzer

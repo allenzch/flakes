@@ -65,7 +65,7 @@ vim.api.nvim_set_keymap('', '<tab>', ':bnext<CR>', { noremap = true })
 vim.lsp.enable('nixd')
 vim.lsp.enable('clangd')
 vim.lsp.enable('rust_analyzer')
-vim.lsp.enable('pyright')
+vim.lsp.enable('pylsp')
 vim.lsp.enable('fortls')
 
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
