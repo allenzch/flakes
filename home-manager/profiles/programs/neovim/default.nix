@@ -45,6 +45,7 @@ in
       nixd
       fortls
       nixpkgs-fmt
+      pyright
       rust-analyzer
     ];
 
