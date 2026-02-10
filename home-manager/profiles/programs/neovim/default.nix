@@ -33,6 +33,7 @@ in
       lualine-nvim
       lualine-lsp-progress
       bufferline-nvim
+      plenary-nvim
       telescope-nvim
       transparent-nvim
       csvview-nvim
