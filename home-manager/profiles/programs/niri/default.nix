@@ -36,9 +36,17 @@ in
       draw-border-with-background = false;
     }];
     layout = {
+      background-color = "transparent";
       gaps = 16;
       default-column-width = { proportion = 1.0 / 2.0; };
     };
+    layer-rules = [
+      {
+        matches = [{ namespace = "^noctalia-wallpaper*"; }];
+        place-within-backdrop = true;
+      }
+    ];
+    overview.workspace-shadow.enable = false;
     spawn-at-startup = [
       { argv = [ "bash" "-c" "systemctl --user import-environment PATH && systemctl --user restart xdg-desktop-portal.service" ]; }
     ];
