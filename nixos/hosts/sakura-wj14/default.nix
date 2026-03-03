@@ -29,6 +29,14 @@
           refresh = 160.0;
         };
       };
+      HDMI-A-1 = {
+        scale = 1.4;
+        mode = {
+          width = 2560;
+          height = 1440;
+          refresh = 60.0;
+        };
+      };
       eDP-1.scale = 1.8;
     };
   };
