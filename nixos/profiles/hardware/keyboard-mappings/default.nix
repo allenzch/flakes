@@ -20,6 +20,10 @@
         KEYBOARD_KEY_700e2=leftmeta
         KEYBOARD_KEY_700e0=leftalt
 
+      evdev:input:b*v046DpC548*
+        KEYBOARD_KEY_70039=esc
+        KEYBOARD_KEY_70029=capslock
+
     '';
   };
 }
