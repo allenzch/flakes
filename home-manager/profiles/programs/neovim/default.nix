@@ -35,7 +35,6 @@ in
       bufferline-nvim
       plenary-nvim
       telescope-nvim
-      transparent-nvim
       csvview-nvim
       base16-nvim
     ];

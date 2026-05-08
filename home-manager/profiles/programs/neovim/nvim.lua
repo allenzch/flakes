@@ -204,6 +204,10 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
+require('catppuccin').setup({
+  transparent_background = true,
+})
+
 require('csvview').setup{
   view = {
     display_mode = "border",
