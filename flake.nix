@@ -36,6 +36,9 @@
                 svgBackend = "librsvg";
               };
             })
+            (final: prev: {
+              kitty = inputs.nixpkgs2605.legacyPackages."x86_64-linux".kitty;
+            })
             inputs.nix-index-database.overlays.nix-index
             inputs.niri-flake.overlays.niri
             inputs.noctalia-shell.overlays.default
@@ -110,5 +113,6 @@
       url = "github:rebmit/nix-exprs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixpkgs2605.url = "github:NixOS/nixpkgs/nixos-26.05";
   };
 }

@@ -9,12 +9,8 @@ in {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    initrd = {
-      kernelModules = [ ];
-      systemd.enable = true;
-    };
+    initrd.systemd.enable = true;
     kernelPackages = mkDefault pkgs.linuxPackages_latest;
-    extraModulePackages = [ ];
     tmp.useTmpfs = true;
   };
 

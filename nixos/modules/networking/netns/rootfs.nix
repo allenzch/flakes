@@ -261,7 +261,6 @@ in
           path = with pkgs; [
             coreutils
             util-linux
-            move-mount-beneath
           ];
           script = ''
             etcMetadataImage=$(readlink -f /run/current-system/netns/${name}/etc-metadata-image)
@@ -282,7 +281,7 @@ in
               mount --type overlay overlay \
                 --options "lowerdir=$tmpMetadataMount::$etcBasedir,relatime,redirect_dir=on,metacopy=on" \
                 "$tmpEtcMount"
-              move-mount --move --beneath "$tmpEtcMount" ${etcPath}
+              mount --move --beneath "$tmpEtcMount" ${etcPath}
               umount --lazy --recursive ${etcPath}
               umount --lazy "$tmpEtcMount"
               rmdir "$tmpEtcMount"

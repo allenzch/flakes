@@ -11,7 +11,7 @@
 
     niri
     libreoffice
-    logseq
+    # logseq
     telegram
     zotero
   ];

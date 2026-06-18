@@ -66,7 +66,6 @@
           KeepConfiguration = true;
         };
         dhcpV4Config.RouteMetric = 1024;
-        dhcpV6Config.RouteMetric = 1024;
         ipv6AcceptRAConfig.RouteMetric = 1024;
       };
     };
