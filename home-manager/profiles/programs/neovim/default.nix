@@ -39,6 +39,7 @@ in
       csvview-nvim
       base16-nvim
       nvim-ghost-nvim
+      typst-preview-nvim
     ];
 
     extraPackages = with pkgs; [
@@ -53,6 +54,8 @@ in
         simple-websocket-server
       ]))
       rust-analyzer
+      tinymist
+      websocat
       wl-clipboard
     ];
 

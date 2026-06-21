@@ -19,10 +19,10 @@
   home.packages = with pkgs; [
     apostrophe
     comma-with-db
+    typst
   ];
 
   programs.bash.enable = true;
-
 
   persistence.directories = [
     ".local"

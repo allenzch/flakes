@@ -67,6 +67,7 @@ vim.lsp.enable('clangd')
 vim.lsp.enable('rust_analyzer')
 vim.lsp.enable('pyright')
 vim.lsp.enable('fortls')
+vim.lsp.enable('tinymist')
 
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
@@ -234,3 +235,11 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.g.nvim_ghost_autostart = 0
 vim.g.nvim_ghost_use_script = 1
 vim.g.nvim_ghost_python_executable = 'python3'
+
+require('typst-preview').setup{
+  dependencies_bin = {
+    tinymist = 'tinymist',
+    websocat = 'websocat',
+  },
+  extra_args = { "--verbose" },
+}
