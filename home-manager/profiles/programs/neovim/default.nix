@@ -19,6 +19,7 @@ in
     defaultEditor = true;
     vimAlias = true;
     vimdiffAlias = true;
+    withPython3 = false;
 
     plugins = with pkgs.vimPlugins; [
       nvim-lspconfig
@@ -37,16 +38,22 @@ in
       telescope-nvim
       csvview-nvim
       base16-nvim
+      nvim-ghost-nvim
     ];
 
     extraPackages = with pkgs; [
-      wl-clipboard
       clang-tools
-      nixd
       fortls
+      nixd
       nixpkgs-fmt
       pyright
+      (python3.withPackages (ps: with ps; [
+        pynvim
+        requests
+        simple-websocket-server
+      ]))
       rust-analyzer
+      wl-clipboard
     ];
 
     extraConfig = ''

@@ -230,3 +230,7 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.expandtab = true
   end,
 })
+
+vim.g.nvim_ghost_autostart = 0
+vim.g.nvim_ghost_use_script = 1
+vim.g.nvim_ghost_python_executable = 'python3'
