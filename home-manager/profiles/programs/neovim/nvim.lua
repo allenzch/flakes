@@ -243,3 +243,20 @@ require('typst-preview').setup{
   },
   extra_args = { "--verbose" },
 }
+
+vim.api.nvim_create_autocmd("InsertLeave", {
+  pattern = "*",
+  callback = function()
+    vim.g.fcitx_status = vim.fn.system("fcitx5-remote"):gsub("\n", "")
+    vim.fn.system("fcitx5-remote -c")
+  end,
+})
+
+vim.api.nvim_create_autocmd("InsertEnter", {
+  pattern = "*",
+  callback = function()
+    if vim.g.fcitx_status == "2" then
+      vim.fn.system("fcitx5-remote -o")
+    end
+  end,
+})
