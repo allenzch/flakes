@@ -93,10 +93,6 @@
       url = "github:tinted-theming/tinted-terminal";
       flake = false;
     };
-    wallpapers = {
-      url = "git+ssh://git@github.com/allenzch/wallpapers.git?shallow=1";
-      flake = false;
-    };
     niri-flake = {
       url = "github:sodiboo/niri-flake/very-refactor";
       inputs.nixpkgs.follows = "nixpkgs";

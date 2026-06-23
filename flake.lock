@@ -414,8 +414,7 @@
         "noctalia-shell": "noctalia-shell",
         "rebmit": "rebmit",
         "sops-nix": "sops-nix",
-        "tinted-terminal": "tinted-terminal",
-        "wallpapers": "wallpapers"
+        "tinted-terminal": "tinted-terminal"
       }
     },
     "sops-nix": {
@@ -473,23 +472,6 @@
         "owner": "numtide",
         "repo": "treefmt-nix",
         "type": "github"
-      }
-    },
-    "wallpapers": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1766158375,
-        "narHash": "sha256-Ii4C9mrqZ5AqfJF+lEWdsn6emNwNvyzq2HL32+jh6nM=",
-        "ref": "refs/heads/master",
-        "rev": "fdaa5969ff7f799ce222d7ee26d14d8b1f7d24de",
-        "shallow": true,
-        "type": "git",
-        "url": "ssh://git@github.com/allenzch/wallpapers.git"
-      },
-      "original": {
-        "shallow": true,
-        "type": "git",
-        "url": "ssh://git@github.com/allenzch/wallpapers.git"
       }
     },
     "xwayland-satellite-stable": {
