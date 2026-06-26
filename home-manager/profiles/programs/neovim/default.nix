@@ -19,7 +19,10 @@ in
     defaultEditor = true;
     vimAlias = true;
     vimdiffAlias = true;
+    withNodeJs = false;
+    withPerl = false;
     withPython3 = false;
+    withRuby = false;
 
     plugins = with pkgs.vimPlugins; [
       nvim-lspconfig
@@ -40,6 +43,7 @@ in
       base16-nvim
       nvim-ghost-nvim
       typst-preview-nvim
+      yazi-nvim
     ];
 
     extraPackages = with pkgs; [

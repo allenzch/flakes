@@ -260,3 +260,7 @@ vim.api.nvim_create_autocmd("InsertEnter", {
     end
   end,
 })
+
+vim.keymap.set('n', '<leader>yy', '<cmd>Yazi<CR>', { noremap = true, desc = "open yazi at the current file" })
+vim.keymap.set('n', '<leader>yc', '<cmd>Yazi cwd<CR>', { noremap = true, desc = "open yazi in nvim's cwd" })
+vim.keymap.set('n', '<leader>yr', '<cmd>Yazi toggle<CR>', { noremap = true, desc = "resume the last yazi session" })
