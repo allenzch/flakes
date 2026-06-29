@@ -242,6 +242,7 @@ require('typst-preview').setup{
     websocat = 'websocat',
   },
   extra_args = { "--verbose" },
+  invert_colors = "auto",
 }
 
 vim.api.nvim_create_autocmd("InsertLeave", {
