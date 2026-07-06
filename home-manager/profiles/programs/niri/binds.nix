@@ -16,8 +16,10 @@ in
     "Mod+Shift+L".action.move-column-right = [];
     "Mod+Shift+J".action.move-column-to-workspace-down = [];
     "Mod+Shift+K".action.move-column-to-workspace-up = [];
-    "Mod+Ctrl+J".action.move-window-down = [];
-    "Mod+Ctrl+K".action.move-window-up = [];
+    "Mod+Ctrl+J".action.focus-monitor-next = [];
+    "Mod+Ctrl+K".action.focus-monitor-previous = [];
+    "Mod+Ctrl+Shift+J".action.move-column-to-monitor-next = [];
+    "Mod+Ctrl+Shift+K".action.move-column-to-monitor-previous = [];
     "Mod+grave".action.toggle-overview = [];
 
     "Mod+F".action.maximize-column = [];
