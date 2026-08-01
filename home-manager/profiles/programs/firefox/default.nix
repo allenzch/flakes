@@ -1,7 +1,8 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   programs.firefox = {
     enable = true;
+    configPath = "${config.xdg.configHome}/mozilla/firefox";
     policies = {
       PasswordManagerEnabled = false;
       DisableTelemetry = true;
@@ -68,5 +69,5 @@
     };
   };
 
-  persistence.directories = [ ".mozilla/firefox" ];
+  persistence.directories = [ ".config/mozilla/firefox" ];
 }
