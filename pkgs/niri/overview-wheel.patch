@@ -1,0 +1,40 @@
+diff --git a/src/input/mod.rs b/src/input/mod.rs
+index 7a0a95b..e15e9f7 100644
+--- a/src/input/mod.rs
++++ b/src/input/mod.rs
+@@ -3210,7 +3210,7 @@ impl State {
+                                 trigger: Trigger::WheelScrollUp,
+                                 modifiers: Modifiers::empty(),
+                             },
+-                            action: Action::FocusWorkspaceUpUnderMouse,
++                            action: Action::FocusColumnLeftUnderMouse,
+                             repeat: true,
+                             cooldown: Some(Duration::from_millis(50)),
+                             allow_when_locked: false,
+@@ -3222,7 +3222,7 @@ impl State {
+                                 trigger: Trigger::WheelScrollDown,
+                                 modifiers: Modifiers::empty(),
+                             },
+-                            action: Action::FocusWorkspaceDownUnderMouse,
++                            action: Action::FocusColumnRightUnderMouse,
+                             repeat: true,
+                             cooldown: Some(Duration::from_millis(50)),
+                             allow_when_locked: false,
+@@ -3236,7 +3236,7 @@ impl State {
+                                 trigger: Trigger::WheelScrollUp,
+                                 modifiers: Modifiers::empty(),
+                             },
+-                            action: Action::FocusColumnLeftUnderMouse,
++                            action: Action::FocusWorkspaceUpUnderMouse,
+                             repeat: true,
+                             cooldown: Some(Duration::from_millis(50)),
+                             allow_when_locked: false,
+@@ -3248,7 +3248,7 @@ impl State {
+                                 trigger: Trigger::WheelScrollDown,
+                                 modifiers: Modifiers::empty(),
+                             },
+-                            action: Action::FocusColumnRightUnderMouse,
++                            action: Action::FocusWorkspaceDownUnderMouse,
+                             repeat: true,
+                             cooldown: Some(Duration::from_millis(50)),
+                             allow_when_locked: false,

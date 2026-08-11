@@ -1,4 +1,10 @@
 self: super: {
+  niri-unstable = super.niri-unstable.overrideAttrs (old: {
+    patches = (old.patches or []) ++ [
+      ./niri/overview-wheel.patch
+      ./niri/overview-side-buttons.patch
+    ];
+  });
   canokey-udev-rules = super.callPackage ./canokey-udev-rules { };
   netns-proxy = super.callPackage ./netns-proxy { };
   pythonPackagesExtensions = super.pythonPackagesExtensions ++ [

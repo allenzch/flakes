@@ -1,0 +1,36 @@
+diff --git a/src/input/mod.rs b/src/input/mod.rs
+index 7a0a95b..fa27b50 100644
+--- a/src/input/mod.rs
++++ b/src/input/mod.rs
+@@ -2830,6 +2830,31 @@ impl State {
+ 
+             let is_overview_open = self.niri.layout.is_overview_open();
+ 
++            if is_overview_open && !pointer.is_grabbed() && modifiers.is_empty() {
++                let action = match button {
++                    Some(MouseButton::Back) => Some(Action::FocusWorkspaceUpUnderMouse),
++                    Some(MouseButton::Forward) => Some(Action::FocusWorkspaceDownUnderMouse),
++                    _ => None,
++                };
++
++                if let Some(action) = action {
++                    self.niri.suppressed_buttons.insert(button_code);
++                    self.handle_bind(Bind {
++                        key: Key {
++                            trigger: Trigger::MouseBack,
++                            modifiers: Modifiers::empty(),
++                        },
++                        action,
++                        repeat: true,
++                        cooldown: None,
++                        allow_when_locked: false,
++                        allow_inhibiting: false,
++                        hotkey_overlay_title: None,
++                    });
++                    return;
++                }
++            }
++
+             if is_overview_open && !pointer.is_grabbed() && button == Some(MouseButton::Right) {
+                 if let Some((output, ws)) = self.niri.workspace_under_cursor(true) {
+                     let ws_id = ws.id();
