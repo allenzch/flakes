@@ -8,8 +8,8 @@ index 7a0a95b..fa27b50 100644
  
 +            if is_overview_open && !pointer.is_grabbed() && modifiers.is_empty() {
 +                let action = match button {
-+                    Some(MouseButton::Back) => Some(Action::FocusWorkspaceUpUnderMouse),
-+                    Some(MouseButton::Forward) => Some(Action::FocusWorkspaceDownUnderMouse),
++                    Some(MouseButton::Back) => Some(Action::FocusWorkspaceDownUnderMouse),
++                    Some(MouseButton::Forward) => Some(Action::FocusWorkspaceUpUnderMouse),
 +                    _ => None,
 +                };
 +
