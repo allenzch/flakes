@@ -1,6 +1,7 @@
 keys:
   age:
     - &misaka-b760 age1u45uunqcxs6urd0tyr62hxpawmr508zul9pducwe0dnr0fucy40ql64jqz
+    - &chiyuri-1197 age1n0wwrh438ksu8tfqm443tw7gvch80uzncqrlkfa0vs03rrmx7gzs2nlktx
 creation_rules:
   - path_regex: secrets/local.*
     key_groups:
@@ -14,3 +15,8 @@ creation_rules:
     key_groups:
       - age:
         - *misaka-b760
+  - path_regex: secrets/hosts/chiyuri-1197.*
+    key_groups:
+      - age:
+        - *misaka-b760
+        - *chiyuri-1197

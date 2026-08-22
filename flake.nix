@@ -64,6 +64,9 @@
         name = "koishi-n100";
       })
       (mkNixosHost {
+        name = "chiyuri-1197";
+      })
+      (mkNixosHost {
         name = "misaka-b760";
         extraSpecialArgs = { inherit data; };
       })
